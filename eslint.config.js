@@ -157,9 +157,9 @@ export default defineConfig([
       "android/**",
       "ios/**",
       "scripts/**",
-      "babel.config.js",
-      "metro.config.js",
-      "tailwind.config.js",
+      "babel.config.cjs",
+      "metro.config.cjs",
+      "tailwind.config.cjs",
     ],
   },
 ]);
