@@ -1,10 +1,13 @@
-import "@/global.css";
 import { Text, View } from "react-native";
+
+import Screen from "@/components/Screen";
 
 export default function HomeScreen() {
   return (
-    <View>
-      <Text className="text-center text-blue-500">Home Screen</Text>
-    </View>
+    <Screen>
+      <View className="flex-1 justify-end">
+        <Text className="text-center text-text">Home Screen</Text>
+      </View>
+    </Screen>
   );
 }
