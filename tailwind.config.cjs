@@ -6,9 +6,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: "var(--bg)",
-        text: "var(--text)"
-      }
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        "foreground-muted": "var(--foreground-muted)",
+        border: "var(--border)",
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
+        tertiary: "var(--tertiary)",
+        neutral: "var(--neutral)",
+      },
     },
   },
   plugins: [],
