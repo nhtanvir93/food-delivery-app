@@ -1,5 +1,6 @@
 {
   "name": "food-delivery-app",
+  "type": "module",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -8,7 +9,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,json}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,css,json}\""
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -43,6 +47,12 @@
     "babel-preset-expo": "~54.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-tailwindcss": "^3.18.3",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2"

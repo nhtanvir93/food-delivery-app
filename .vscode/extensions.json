@@ -1,1 +1,22 @@
-{ "recommendations": ["expo.vscode-expo-tools"] }
+{
+  "recommendations": [
+    // ── Formatting & Linting ──
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // ── Tailwind / NativeWind ──
+    "bradlc.vscode-tailwindcss",
+
+    // ── TypeScript & React ──
+    "ms-vscode.vscode-typescript-next",
+    "dsznajder.es7-react-js-snippets",
+
+    // ── Expo / React Native ──
+    "expo.vscode-expo-tools",
+
+    // ── General DX ──
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "christian-kohler.path-intellisense"
+  ]
+}
