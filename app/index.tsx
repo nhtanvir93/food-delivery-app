@@ -17,8 +17,18 @@ export default function HomeScreen() {
         <View className="h-16 w-full bg-foreground" />
         <View className="h-16 w-full bg-foreground-muted" />
         <Text className="text-foreground">Hello World</Text>
+        <Text className="font-sans-bold text-2xl">Hello</Text>
+        <Button>
+          <Text>Primary</Text>
+        </Button>
         <Button variant="secondary">
-          <Text>Button</Text>
+          <Text>Secondary</Text>
+        </Button>
+        <Button variant="outline">
+          <Text>Outline</Text>
+        </Button>
+        <Button variant="destructive">
+          <Text>Destructive</Text>
         </Button>
       </View>
     </Screen>

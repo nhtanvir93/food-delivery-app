@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const textVariants = cva(
   cn(
-    "text-foreground text-base",
+    "font-sans text-foreground text-base",
     Platform.select({
       web: "select-text",
     }),
@@ -17,7 +17,7 @@ const textVariants = cva(
       variant: {
         default: "",
         h1: cn(
-          "text-center text-4xl font-extrabold tracking-tight",
+          "text-center text-4xl font-sans-bold tracking-tight",
           Platform.select({ web: "scroll-m-20 text-balance" }),
         ),
         h2: cn(
