@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
 
 import Screen from "@/components/Screen";
+import { Button } from "@/components/ui/button";
 
 export default function HomeScreen() {
   return (
@@ -16,6 +17,9 @@ export default function HomeScreen() {
         <View className="h-16 w-full bg-foreground" />
         <View className="h-16 w-full bg-foreground-muted" />
         <Text className="text-foreground">Hello World</Text>
+        <Button variant="secondary">
+          <Text>Button</Text>
+        </Button>
       </View>
     </Screen>
   );

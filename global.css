@@ -4,18 +4,43 @@
 
 @layer base {
   :root {
-    --background: #ffe9e4;
-    --foreground: #5a3f38;
-    --foreground-muted: #9d837d;
-    --border: #9d837d;
-    --primary: #e8471a;
-    --secondary: #be593e;
-    --tertiary: #0084dc;
-    --neutral: #89726c;
+    --background: 13 100% 94%; /* #ffe9e4 */
+    --foreground: 10 21% 29%; /* #5a3f38 */
+    --foreground-muted: 12 22% 55%; /* #9d837d */
+    --border: 12 22% 55%; /* #9d837d */
+    --primary: 16 82% 50%; /* #e8471a */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 18 52% 49%; /* #be593e */
+    --secondary-foreground: 0 0% 100%;
+    --tertiary: 210 100% 43%; /* #0084dc */
+    --neutral: 12 16% 48%; /* #89726c */
+    --card: 13 100% 94%; /* same as background */
+    --card-foreground: 10 21% 29%; /* same as foreground */
+    --popover: 13 100% 94%;
+    --popover-foreground: 10 21% 29%;
+    --muted: 12 22% 55%; /* same as foreground-muted */
+    --muted-foreground: 12 22% 55%;
+    --accent: 210 100% 43%; /* same as tertiary */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --input: 12 22% 55%; /* same as border */
+    --ring: 16 82% 50%; /* same as primary */
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: #0f0f0f;
-    --border: #313131;
+    --background: 0 0% 6%; /* #0f0f0f */
+    --foreground: 20 10% 95%; /* #f5f0ef */
+    --foreground-muted: 0 0% 54%; /* #8a8a8a */
+    --border: 0 0% 19%; /* #313131 */
+    --card: 0 0% 10%;
+    --card-foreground: 20 10% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 20 10% 95%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 55%;
+    --input: 0 0% 19%; /* same as border */
+    --ring: 16 82% 50%; /* primary stays same in dark */
   }
 }
