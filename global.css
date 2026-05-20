@@ -14,6 +14,7 @@
     --secondary-foreground: 0 0% 100%;
     --tertiary: 210 100% 43%; /* #0084dc */
     --neutral: 12 16% 48%; /* #89726c */
+    --inverted: 11, 22%, 20%;
     --card: 13 100% 94%; /* same as background */
     --card-foreground: 10 21% 29%; /* same as foreground */
     --popover: 13 100% 94%;

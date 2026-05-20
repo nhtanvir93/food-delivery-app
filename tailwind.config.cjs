@@ -30,6 +30,7 @@ module.exports = {
           foreground: "hsl(var(--secondary-foreground))",
         },
         tertiary: "hsl(var(--tertiary))",
+        inverted: "hsl(var(--inverted))",
         neutral: "hsl(var(--neutral))",
         card: {
           DEFAULT: "hsl(var(--card))",
