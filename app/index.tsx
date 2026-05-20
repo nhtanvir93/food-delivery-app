@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function HomeScreen() {
   return (
     <Screen>
-      <View className="flex-1 bg-background">
+      <View className="flex-1">
         <Text className="text-center font-extrabold">Home Screen</Text>
         <View className="h-16 w-full bg-primary" />
         <View className="h-16 w-full bg-secondary" />

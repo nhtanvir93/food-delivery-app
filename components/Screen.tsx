@@ -7,7 +7,10 @@ interface Props {
 
 export default function Screen({ children }: Props) {
   return (
-    <SafeAreaView edges={["top", "bottom"]} className="relative flex-1">
+    <SafeAreaView
+      edges={["top", "bottom"]}
+      className="relative flex-1 bg-background p-4"
+    >
       {children}
     </SafeAreaView>
   );

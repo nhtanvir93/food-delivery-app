@@ -19,10 +19,6 @@ import ThemeProvider from "@/components/theme-provider";
 
 void SplashScreen.preventAutoHideAsync();
 
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
-
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter_400Regular,
