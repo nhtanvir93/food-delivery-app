@@ -19,18 +19,21 @@ module.exports = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        text: "hsl(var(--text))",
         "foreground-muted": "hsl(var(--foreground-muted))",
         border: "hsl(var(--border))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          btn: "hsl(var(--primary-btn))"
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          btn: "hsl(var(--secondary-btn))"
         },
         tertiary: "hsl(var(--tertiary))",
-        inverted: "hsl(var(--inverted))",
+        "inverted-btn": "hsl(var(--inverted-btn))",
         neutral: "hsl(var(--neutral))",
         card: {
           DEFAULT: "hsl(var(--card))",

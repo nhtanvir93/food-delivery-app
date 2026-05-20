@@ -10,7 +10,7 @@ export default function HomeScreen() {
       <View className="flex-1">
         <View className="flex-row items-center justify-between">
           <DeliveryLocation className="w-3/4" />
-          <Checkout className="w-1/4 self-stretch" />
+          <Checkout />
         </View>
       </View>
     </Screen>

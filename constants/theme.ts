@@ -1,6 +1,22 @@
 export const Colors = {
-  primary: "#e8471a",
-  secondary: "#be593e",
-  tertiary: "#0084dc",
-  neutral: "#89726c",
+  light: {
+    text: "#ffffff",
+    primary: "#e9481c",
+    primaryBtn: "#ad2800",
+    secondary: "#bd593d",
+    secondaryBtn: "#ffe2db",
+    tertiary: "#0084db",
+    neutral: "#89726c",
+    invertedBtn: "#3e2c28",
+  },
+  dark: {
+    text: "#000000",
+    primary: "#e9481c",
+    primaryBtn: "#ffb6a3",
+    secondary: "#1d9f76",
+    secondaryBtn: "#362521",
+    tertiary: "#0084db",
+    neutral: "#89726c",
+    invertedBtn: "#faddd6",
+  },
 };

@@ -6,15 +6,18 @@
   :root {
     --background: 0, 0%, 100%; /* #ffe9e4 */
     --foreground: 10 21% 29%; /* #5a3f38 */
+    --text: 0 0% 6%;
     --foreground-muted: 12 22% 55%; /* #9d837d */
     --border: 12 22% 55%; /* #9d837d */
-    --primary: 14, 100%, 34%; /* #e8471a */
+    --primary: 13, 82%, 51%; /* #e8471a */
     --primary-foreground: 0 0% 100%;
-    --secondary: 12, 100%, 93%; /* #be593e */
+    --primary-btn: 14, 100%, 34%;
+    --secondary: 13, 51%, 49%; /* #be593e */
+    --secondary-btn: 12, 100%, 93%;
     --secondary-foreground: 0 0% 100%;
-    --tertiary: 210 100% 43%; /* #0084dc */
-    --neutral: 12 16% 48%; /* #89726c */
-    --inverted: 11, 22%, 20%;
+    --tertiary: 204, 100%, 43%; /* #0084dc */
+    --neutral: 12, 12%, 48%; /* #89726c */
+    --inverted-btn: 11, 22%, 20%;
     --card: 13 100% 94%; /* same as background */
     --card-foreground: 10 21% 29%; /* same as foreground */
     --popover: 13 100% 94%;
@@ -33,6 +36,14 @@
   .dark {
     --background: 0 0% 6%; /* #0f0f0f */
     --foreground: 20 10% 95%; /* #f5f0ef */
+    --text: 0, 0%, 100%;
+    --primary: 13, 82%, 51%;
+    --primary-btn: 12, 100%, 82%;
+    --secondary: 161, 69%, 37%;
+    --secondary-btn: 11, 24%, 17%;
+    --tertiary: 204, 100%, 43%;
+    --neutral: 12, 12%, 48%;
+    --inverted-btn: 11, 79%, 91%;
     --foreground-muted: 0 0% 54%; /* #8a8a8a */
     --border: 0 0% 19%; /* #313131 */
     --card: 0 0% 10%;
