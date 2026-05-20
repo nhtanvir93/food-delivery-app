@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: 13 100% 94%; /* #ffe9e4 */
+    --background: 0, 0%, 100%; /* #ffe9e4 */
     --foreground: 10 21% 29%; /* #5a3f38 */
     --foreground-muted: 12 22% 55%; /* #9d837d */
     --border: 12 22% 55%; /* #9d837d */
-    --primary: 16 82% 50%; /* #e8471a */
+    --primary: 14, 100%, 34%; /* #e8471a */
     --primary-foreground: 0 0% 100%;
-    --secondary: 18 52% 49%; /* #be593e */
+    --secondary: 12, 100%, 93%; /* #be593e */
     --secondary-foreground: 0 0% 100%;
     --tertiary: 210 100% 43%; /* #0084dc */
     --neutral: 12 16% 48%; /* #89726c */

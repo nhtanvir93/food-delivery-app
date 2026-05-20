@@ -15,10 +15,10 @@ export default function DeliveryLocation({
         <FontAwesome6 name="location-dot" size={24} color={Colors.secondary} />
       </View>
       <View>
-        <Text className="font-bold tracking-widest text-secondary">
+        <Text className="font-bold tracking-widest text-primary">
           Deliver to
         </Text>
-        <View className="flex-row items-center gap-1">
+        <View className="flex-row items-center gap-2">
           <Text numberOfLines={1} ellipsizeMode="tail">
             Devpahar, College Road, Chawbazar
           </Text>
