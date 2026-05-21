@@ -5,7 +5,7 @@ import Screen from "@/components/Screen";
 export default function HomeScreen() {
   return (
     <Screen>
-      <Text>Home</Text>
+      <Text className="text-foreground">Home</Text>
     </Screen>
   );
 }

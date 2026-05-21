@@ -33,7 +33,7 @@ const darkTheme = vars({
   "--icon-background": "38 38 38",
   "--input": "255 255 255",
   "--star": "240 174 0",
-  "--border": "30 30 30",
+  "--border": "50 50 50",
 });
 
 interface Props {
