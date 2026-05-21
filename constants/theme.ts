@@ -39,3 +39,6 @@ export const COLORS = {
     input: "#FFFFFF",
   },
 } as const;
+
+export type ThemeMode = keyof typeof COLORS;
+export type Theme = (typeof COLORS)[ThemeMode];
