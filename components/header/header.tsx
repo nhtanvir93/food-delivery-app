@@ -25,7 +25,7 @@ const Header = () => {
           color={theme.textForeground}
         />
         <View className="flex-1 gap-1">
-          <Text className="text-2xl text-foreground">FoodHub</Text>
+          <Text className="text-2xl font-bold text-foreground">FoodHub</Text>
           <Location theme={theme} />
         </View>
       </View>
