@@ -21,10 +21,9 @@ export default function HomeScreen() {
           </Text>
           <SearchInput ref={searchInputRef} />
           <Button
-            className="bg-icon-background"
             onPress={() => console.log(searchInputRef?.current?.getValue())}
           >
-            <Text className="tracking-wide text-foreground">Search</Text>
+            <Text className="tracking-wide text-background">Search</Text>
           </Button>
         </View>
         <View className="gap-2">
