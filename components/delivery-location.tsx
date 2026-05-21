@@ -20,11 +20,9 @@ export default function DeliveryLocation({
         <FontAwesome6 name="location-dot" size={24} color={theme.secondary} />
       </View>
       <View>
-        <Text className="font-bold tracking-widest text-secondary">
-          Deliver to
-        </Text>
+        <Text className="font-bold tracking-widest">Deliver to</Text>
         <View className="flex-row items-center gap-2">
-          <Text numberOfLines={1} ellipsizeMode="tail" className="text-text">
+          <Text numberOfLines={1} ellipsizeMode="tail">
             Devpahar, College Road, Chawbazar
           </Text>
           <FontAwesome name="chevron-down" size={12} color={theme.secondary} />

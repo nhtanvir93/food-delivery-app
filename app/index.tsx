@@ -1,18 +1,22 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import Checkout from "@/components/checkout";
 import DeliveryLocation from "@/components/delivery-location";
 import Screen from "@/components/Screen";
 
+import ScreenHeader from "../components/screen-header";
+
 export default function HomeScreen() {
   return (
-    <Screen>
-      <View className="flex-1">
+    <Screen
+      header=<ScreenHeader>
         <View className="flex-row items-center justify-between">
           <DeliveryLocation className="w-3/4" />
           <Checkout />
         </View>
-      </View>
+      </ScreenHeader>
+    >
+      <Text>Home</Text>
     </Screen>
   );
 }

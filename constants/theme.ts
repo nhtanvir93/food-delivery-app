@@ -1,6 +1,7 @@
 export const Colors = {
   light: {
     text: "#ffffff",
+    themeBackground: "#fff1ed",
     primary: "#e9481c",
     primaryBtn: "#ad2800",
     secondary: "#bd593d",
@@ -11,6 +12,7 @@ export const Colors = {
   },
   dark: {
     text: "#000000",
+    themeBackground: "#2c1c18",
     primary: "#e9481c",
     primaryBtn: "#ffb6a3",
     secondary: "#1d9f76",
