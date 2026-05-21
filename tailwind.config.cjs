@@ -1,10 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // NOTE: Update this to include the paths to all files that contain Nativewind classes.
   content: [
-    "./App.tsx", 
-    "./app/**/*", 
-    "./components/**/*.{js,jsx,ts,tsx}", 
+    "./App.tsx",
+    "./app/**/*",
+    "./components/**/*.{js,jsx,ts,tsx}",
     "./node_modules/@rn-primitives/**/*.{js,jsx,ts,tsx}",
   ],
   presets: [require("nativewind/preset")],
@@ -17,29 +16,30 @@ module.exports = {
         "sans-bold": ["Inter_700Bold"],
       },
       colors: {
-        background: "hsl(var(--background))",
+        background:        "rgb(var(--background) / <alpha-value>)",
+        foreground:        "rgb(var(--text-foreground) / <alpha-value>)",
+        "muted-foreground":"rgb(var(--text-muted-foreground) / <alpha-value>)",
+        "icon-background": "rgb(var(--icon-background) / <alpha-value>)",
+        input:             "rgb(var(--input) / <alpha-value>)",
+        star:              "rgb(var(--star) / <alpha-value>)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT:         "rgb(var(--primary) / <alpha-value>)",
+          foreground:      "rgb(var(--primary-foreground) / <alpha-value>)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT:         "rgb(var(--secondary) / <alpha-value>)",
+          foreground:      "rgb(var(--secondary-foreground) / <alpha-value>)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))"
+          DEFAULT:         "rgb(var(--destructive) / <alpha-value>)",
+          foreground:      "rgb(var(--destructive-foreground) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))"
+          DEFAULT:         "rgb(var(--accent) / <alpha-value>)",
+          foreground:      "rgb(var(--accent-foreground) / <alpha-value>)",
         },
-        foreground: "hsl(var(--text-foreground))",
-        "muted-foreground": "hsl(var(--text-muted-foreground))",
-        "icon-background": "hsl(var(--icon-background))",
-        notification: "hsl(var(--icon-background))",
-        input: "hsl(var(--input))",
-        star: "hsl(var(--star))"
-      }
+        border: "rgb(var(--border) / <alpha-value>)",
+      },
     },
-  },
-  plugins: [],
+  }
 };

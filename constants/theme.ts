@@ -1,24 +1,41 @@
-export const Colors = {
+export const COLORS = {
   light: {
-    text: "#ffffff",
-    themeBackground: "#fff1ed",
-    primary: "#e9481c",
-    primaryBtn: "#ad2800",
-    secondary: "#bd593d",
-    secondaryBtn: "#ffe2db",
-    tertiary: "#0084db",
-    neutral: "#89726c",
-    invertedBtn: "#3e2c28",
+    background: "#FFFFFF",
+
+    primary: "#0A0A0A",
+    primaryForeground: "#FFFFFF",
+
+    secondary: "#F5F5F5",
+    secondaryForeground: "#FFFFFF",
+
+    destructive: "#E14B4B",
+    destructiveForeground: "#FFFFFF",
+
+    accent: "#297DFF",
+    accentForeground: "#FFFFFF",
+
+    textForeground: "#0A0A0A",
+    textMutedForeground: "#B4B4BC",
+
+    iconBackground: "#E8ECF1",
+    input: "#F3F4F6",
+
+    star: "#F0B000",
   },
+
   dark: {
-    text: "#000000",
-    themeBackground: "#2c1c18",
-    primary: "#e9481c",
-    primaryBtn: "#ffb6a3",
-    secondary: "#1d9f76",
-    secondaryBtn: "#362521",
-    tertiary: "#0084db",
-    neutral: "#89726c",
-    invertedBtn: "#faddd6",
+    background: "#0A0A0A",
+
+    primary: "#FFFFFF",
+    primaryForeground: "#0A0A0A",
+
+    secondary: "#262626",
+    secondaryForeground: "#0A0A0A",
+
+    textForeground: "#FAFAFA",
+    textMutedForeground: "#969696",
+
+    iconBackground: "#262626",
+    input: "#FFFFFF",
   },
-};
+} as const;
