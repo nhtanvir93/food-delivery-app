@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import { COLORS } from "@/constants/theme";
@@ -10,8 +10,9 @@ import Location from "./location";
 
 const Header = () => {
   const { colorScheme } = useColorScheme();
-
-  const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
+  const theme = useMemo(() => {
+    return colorScheme === "dark" ? COLORS.dark : COLORS.light;
+  }, [colorScheme]);
 
   return (
     <View
@@ -29,7 +30,7 @@ const Header = () => {
           <Location theme={theme} />
         </View>
       </View>
-      <HeaderActions theme={theme} />
+      <HeaderActions />
     </View>
   );
 };

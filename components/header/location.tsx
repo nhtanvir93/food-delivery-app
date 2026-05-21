@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { memo } from "react";
 import { View, Text } from "react-native";
 
 import { type Theme } from "@/constants/theme";
@@ -23,4 +23,4 @@ const Location = ({ theme }: { theme: Theme }) => {
   );
 };
 
-export default Location;
+export default memo(Location);

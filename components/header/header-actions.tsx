@@ -1,13 +1,16 @@
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import React from "react";
+import React, { useMemo } from "react";
 import { Pressable, View } from "react-native";
 
-import { type Theme } from "@/constants/theme";
+import { COLORS } from "@/constants/theme";
 import { useColorScheme } from "@/lib/useColorScheme";
 
-const HeaderActions = ({ theme }: { theme: Theme }) => {
+const HeaderActions = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
+  const theme = useMemo(() => {
+    return colorScheme === "dark" ? COLORS.dark : COLORS.light;
+  }, [colorScheme]);
 
   return (
     <View className="w-1/2 flex-row items-center justify-end gap-2 self-stretch">
