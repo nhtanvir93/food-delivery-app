@@ -1,27 +1,27 @@
 export const statusConfig = {
   pending: {
     label: "Order Pending",
-    icon: "CLOCK",
+    icon: "AntDesign:clock-circle",
     color: "text-yellow-500",
   },
   confirmed: {
     label: "Order Confirmed",
-    icon: "PACKAGE",
+    icon: "Feather:package",
     color: "text-blue-500",
   },
   preparing: {
     label: "Being Prepared",
-    icon: "CHEF_HAT",
+    icon: "MaterialCommunityIcons:chef-hat",
     color: "text-orange-500",
   },
   out_for_delivery: {
     label: "Out for Delivery",
-    icon: "TRUCK",
+    icon: "AntDesign:truck",
     color: "text-purple-500",
   },
   delivered: {
     label: "Delivered",
-    icon: "CHECK_CIRCLE",
+    icon: "Feather:check-circle",
     color: "text-green-500",
   },
 } as const;
