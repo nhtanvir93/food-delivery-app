@@ -40,7 +40,7 @@ const SearchInput = (
         size={24}
       />
       <TextInput
-        className="flex-1 text-black"
+        className="flex-1 tracking-wide text-black"
         placeholder={placeholder}
         onChangeText={setSearchKey}
       />

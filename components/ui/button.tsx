@@ -71,7 +71,7 @@ const buttonTextVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-foreground",
+        default: "text-background",
         destructive: "text-white",
         outline: cn(
           "group-active:text-accent-foreground",
