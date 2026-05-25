@@ -24,8 +24,8 @@ const lightTheme = vars({
 
 const darkTheme = vars({
   "--background": "10 10 10",
-  "--primary": "255 255 255",
-  "--primary-foreground": "10 10 10",
+  "--primary": "38 38 38",
+  "--primary-foreground": "255 255 255",
   "--secondary": "38 38 38",
   "--secondary-foreground": "10 10 10",
   "--text-foreground": "250 250 250",
