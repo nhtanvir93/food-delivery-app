@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { menuItemsByRestaurant } from "@/constants/api-dummy-data";
+import { menuItemsByRestaurant, restaurants } from "@/constants/api-dummy-data";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,4 +13,9 @@ export function getFoodCategories() {
     .map((menuItem) => menuItem.category);
 
   return [...new Set(categories)].sort();
+}
+
+export function getRestaurants(offset = 0, limit = 2) {
+  console.log(`Offset : ${offset}`);
+  return restaurants.slice(offset, offset + limit);
 }

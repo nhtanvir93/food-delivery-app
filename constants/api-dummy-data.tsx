@@ -235,7 +235,7 @@ export const menuItemsByRestaurant = {
   ],
 } as const;
 
-type RestaurantType = (typeof restaurants)[number];
+export type RestaurantType = (typeof restaurants)[number];
 
 export type RestaurantIdType = RestaurantType["id"];
 export type ValidRestaurantIdType = RestaurantIdType &
