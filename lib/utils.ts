@@ -16,6 +16,5 @@ export function getFoodCategories() {
 }
 
 export function getRestaurants(offset = 0, limit = 2) {
-  console.log(`Offset : ${offset}`);
   return restaurants.slice(offset, offset + limit);
 }

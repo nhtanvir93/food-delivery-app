@@ -34,6 +34,10 @@ const darkTheme = vars({
   "--input": "255 255 255",
   "--star": "240 174 0",
   "--border": "50 50 50",
+  "--destructive": "220 53 53",
+  "--destructive-foreground": "255 255 255",
+  "--accent": "41 121 255",
+  "--accent-foreground": "255 255 255",
 });
 
 interface Props {

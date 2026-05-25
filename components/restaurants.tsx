@@ -1,5 +1,6 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image } from "expo-image";
+import { InfoIcon } from "lucide-react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
@@ -8,10 +9,12 @@ import { COLORS } from "@/constants/theme";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { getRestaurants } from "@/lib/utils";
 
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Card, CardContent, CardHeader } from "./ui/card";
 
 const Restaurants = () => {
   const [restaurants, setRestaurants] = useState<RestaurantType[]>([]);
+  const [loading, setLoading] = useState(false);
   const offsetRef = useRef(0);
 
   const { colorScheme } = useColorScheme();
@@ -19,7 +22,9 @@ const Restaurants = () => {
 
   const loadRestaurants = useCallback(() => {
     setRestaurants((prev) => {
+      setLoading(true);
       const nextRestaurants = getRestaurants(offsetRef.current);
+      setLoading(false);
 
       if (nextRestaurants.length === 0) {
         return [...prev];
@@ -91,6 +96,17 @@ const Restaurants = () => {
           </Card>
         )}
         contentContainerClassName="gap-4"
+        ListEmptyComponent={
+          !loading && restaurants.length === 0 ? (
+            <Alert variant="destructive" icon={InfoIcon} iconClassName="size-5">
+              <AlertTitle className="font-bold">No matches found</AlertTitle>
+              <AlertDescription>
+                No restaurants match your current search. Try a different
+                keyword or category.
+              </AlertDescription>
+            </Alert>
+          ) : null
+        }
         onEndReached={loadRestaurants}
         onEndReachedThreshold={0.5}
       />
