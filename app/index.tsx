@@ -5,12 +5,9 @@ import Categories from "@/components/categories";
 import Screen from "@/components/Screen";
 import SearchInput, { type SearchInputType } from "@/components/search-input";
 import { Button } from "@/components/ui/button";
-import { getFoodCategories } from "@/lib/utils";
 
 export default function HomeScreen() {
   const searchInputRef = useRef<SearchInputType>(null);
-
-  console.log(getFoodCategories());
 
   return (
     <Screen>
