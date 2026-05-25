@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, View, Text } from "react-native";
+import React, {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { FlatList, View, Text, Pressable } from "react-native";
 
 import { getFoodCategories } from "@/lib/utils";
 
-const Categories = () => {
+const Categories = ({
+  setActiveCategory,
+}: {
+  setActiveCategory: Dispatch<SetStateAction<string>>;
+}) => {
   const [categories, setCategories] = useState<string[]>([]);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     setCategories(getFoodCategories());
@@ -21,9 +31,20 @@ const Categories = () => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, idx) => `category-${idx}`}
         renderItem={({ item: category }) => (
-          <View className="rounded-3xl bg-icon-background px-6 py-2">
-            <Text className="tracking-wide text-foreground">{category}</Text>
-          </View>
+          <Pressable
+            className={`rounded-3xl px-6 py-2 ${category === active ? "bg-foreground" : "bg-icon-background"}`}
+            onPress={() => {
+              const next = active === category ? "" : category;
+              setActive(next);
+              setActiveCategory(next);
+            }}
+          >
+            <Text
+              className={`tracking-wide ${category === active ? "text-background" : "text-foreground"}`}
+            >
+              {category}
+            </Text>
+          </Pressable>
         )}
         contentContainerClassName="gap-3"
       />

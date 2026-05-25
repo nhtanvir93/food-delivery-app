@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { View, Text } from "react-native";
 
 import Categories from "@/components/categories";
@@ -8,6 +8,9 @@ import SearchInput, { type SearchInputType } from "@/components/search-input";
 import { Button } from "@/components/ui/button";
 
 export default function HomeScreen() {
+  const [searchKey, setSearchKey] = useState("");
+  const [category, setCategory] = useState("");
+
   const searchInputRef = useRef<SearchInputType>(null);
 
   return (
@@ -19,7 +22,11 @@ export default function HomeScreen() {
           </Text>
           <SearchInput ref={searchInputRef} />
           <Button
-            onPress={() => console.log(searchInputRef?.current?.getValue())}
+            onPress={() => {
+              if (searchInputRef.current) {
+                setSearchKey(searchInputRef.current.getValue());
+              }
+            }}
           >
             <Text className="tracking-wide text-primary-foreground">
               Search
@@ -27,8 +34,8 @@ export default function HomeScreen() {
           </Button>
         </View>
         <View className="flex-1 gap-4">
-          <Categories />
-          <Restaurants />
+          <Categories setActiveCategory={setCategory} />
+          <Restaurants searchKey={searchKey} category={category} />
         </View>
       </View>
     </Screen>

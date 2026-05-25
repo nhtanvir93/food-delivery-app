@@ -236,10 +236,13 @@ export const menuItemsByRestaurant = {
 } as const;
 
 export type RestaurantType = (typeof restaurants)[number];
-
 export type RestaurantIdType = RestaurantType["id"];
-export type ValidRestaurantIdType = RestaurantIdType &
-  keyof typeof menuItemsByRestaurant;
 
-export type MenuItemType<K extends ValidRestaurantIdType> =
+export type ValidRestaurantIdType = keyof typeof menuItemsByRestaurant;
+export type MenuItemType =
+  (typeof menuItemsByRestaurant)[ValidRestaurantIdType][number];
+
+export type MenuItemByRestaurantType<K extends ValidRestaurantIdType> =
   (typeof menuItemsByRestaurant)[K][number];
+
+export type MenuCategoryType = MenuItemType["category"];

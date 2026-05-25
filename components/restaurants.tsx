@@ -12,10 +12,21 @@ import { getRestaurants } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Card, CardContent, CardHeader } from "./ui/card";
 
-const Restaurants = () => {
+const Restaurants = ({
+  searchKey = "",
+  category = "",
+}: {
+  searchKey?: string;
+  category?: string;
+}) => {
   const [restaurants, setRestaurants] = useState<RestaurantType[]>([]);
   const [loading, setLoading] = useState(false);
   const offsetRef = useRef(0);
+
+  useEffect(() => {
+    offsetRef.current = 0;
+    setRestaurants([]);
+  }, [searchKey, category]);
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -23,7 +34,11 @@ const Restaurants = () => {
   const loadRestaurants = useCallback(() => {
     setRestaurants((prev) => {
       setLoading(true);
-      const nextRestaurants = getRestaurants(offsetRef.current);
+      const nextRestaurants = getRestaurants(
+        offsetRef.current,
+        category,
+        searchKey,
+      );
       setLoading(false);
 
       if (nextRestaurants.length === 0) {
@@ -33,7 +48,7 @@ const Restaurants = () => {
       offsetRef.current += nextRestaurants.length;
       return [...prev, ...nextRestaurants];
     });
-  }, []);
+  }, [searchKey, category]);
 
   useEffect(() => {
     loadRestaurants();
