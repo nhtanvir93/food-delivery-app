@@ -71,3 +71,18 @@ export function getRestaurantDetails(id: string) {
     menuItems: menuItems ? [...menuItems] : [],
   };
 }
+
+export function groupBy<T>(
+  array: T[],
+  keyFn: (item: T) => string,
+): Record<string, T[]> {
+  return array.reduce(
+    (result, item) => {
+      const group = keyFn(item);
+      result[group] = result[group] ?? [];
+      result[group].push(item);
+      return result;
+    },
+    {} as Record<string, T[]>,
+  );
+}
