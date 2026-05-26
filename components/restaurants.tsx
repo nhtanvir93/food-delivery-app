@@ -1,8 +1,9 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image } from "expo-image";
+import { router } from "expo-router";
 import { InfoIcon } from "lucide-react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
 
 import { type RestaurantType } from "@/constants/api-dummy-data";
 import { COLORS } from "@/constants/theme";
@@ -66,49 +67,57 @@ const Restaurants = ({
         showsVerticalScrollIndicator={false}
         keyExtractor={(restaurant) => `restaurant-${restaurant.id}`}
         renderItem={({ item: restaurant }) => (
-          <Card className="w-full">
-            <CardHeader className="flex-row">
-              <View className="h-[200px] w-full">
-                <Image
-                  className="flex-1"
-                  source={{ uri: restaurant.image }}
-                  // eslint-disable-next-line react-native/no-inline-styles
-                  style={{ width: "100%", height: "100%" }}
-                  contentFit="cover"
-                />
-              </View>
-            </CardHeader>
-            <CardContent>
-              <View className="mb-2">
-                <Text className="text-xl font-bold text-foreground">
-                  {restaurant.name}
-                </Text>
-              </View>
-              <View className="mb-3 w-full flex-row items-center gap-4">
-                <View className="flex-row gap-2">
-                  <AntDesign
-                    name="clock-circle"
-                    size={20}
-                    color={theme.textMutedForeground}
+          <Pressable
+            onPress={() => router.push(`/restaurants/${restaurant.id}`)}
+          >
+            <Card className="w-full">
+              <CardHeader className="flex-row">
+                <View className="relative h-[200px] w-full">
+                  <Image
+                    className="flex-1"
+                    source={{ uri: restaurant.image }}
+                    // eslint-disable-next-line react-native/no-inline-styles
+                    style={{ width: "100%", height: "100%" }}
+                    contentFit="cover"
                   />
-                  <Text className="text-muted-foreground">
-                    {restaurant.deliveryTime}
+                  <View className="absolute right-3 top-3 flex-row gap-2 rounded-lg bg-icon-background px-2 py-1">
+                    <AntDesign name="star" size={18} color={theme.star} />
+                    <Text className="text-foreground">{restaurant.rating}</Text>
+                  </View>
+                </View>
+              </CardHeader>
+              <CardContent>
+                <View className="mb-2">
+                  <Text className="text-xl font-bold tracking-wide text-foreground">
+                    {restaurant.name}
                   </Text>
                 </View>
-                <View className="size-1 rounded-full bg-muted-foreground" />
-                <Text className="text-muted-foreground">
-                  {restaurant.category}
+                <View className="mb-3 w-full flex-row items-center gap-4">
+                  <View className="flex-row gap-2">
+                    <AntDesign
+                      name="clock-circle"
+                      size={20}
+                      color={theme.textMutedForeground}
+                    />
+                    <Text className="text-muted-foreground">
+                      {restaurant.deliveryTime}
+                    </Text>
+                  </View>
+                  <View className="size-1 rounded-full bg-muted-foreground" />
+                  <Text className="tracking-wide text-muted-foreground">
+                    {restaurant.category}
+                  </Text>
+                  <View className="size-1 rounded-full bg-muted-foreground" />
+                  <Text className="tracking-wide text-muted-foreground">
+                    {restaurant.priceRange}
+                  </Text>
+                </View>
+                <Text className="text-sm tracking-wide text-muted-foreground">
+                  {restaurant.distance}
                 </Text>
-                <View className="size-1 rounded-full bg-muted-foreground" />
-                <Text className="text-muted-foreground">
-                  {restaurant.priceRange}
-                </Text>
-              </View>
-              <Text className="text-sm text-muted-foreground">
-                {restaurant.distance}
-              </Text>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </Pressable>
         )}
         contentContainerClassName="gap-4"
         ListEmptyComponent={

@@ -246,3 +246,7 @@ export type MenuItemByRestaurantType<K extends ValidRestaurantIdType> =
   (typeof menuItemsByRestaurant)[K][number];
 
 export type MenuCategoryType = MenuItemType["category"];
+
+export type RestaurantDetailsType = RestaurantType & {
+  menuItems: MenuItemType[];
+};

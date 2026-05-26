@@ -5,6 +5,7 @@ import {
   menuItemsByRestaurant,
   type RestaurantIdType,
   restaurants,
+  type ValidRestaurantIdType,
 } from "@/constants/api-dummy-data";
 
 export function cn(...inputs: ClassValue[]) {
@@ -53,4 +54,20 @@ export function getRestaurants(
   return restaurants
     .filter((r) => validRestaurantIds.includes(r.id))
     .slice(offset, offset + limit);
+}
+
+export function getRestaurantDetails(id: string) {
+  const restaurant = restaurants.find((r) => r.id === id);
+
+  if (!restaurant) {
+    return null;
+  }
+
+  const menuItems =
+    menuItemsByRestaurant[restaurant.id as ValidRestaurantIdType];
+
+  return {
+    ...restaurant,
+    menuItems: menuItems ? [...menuItems] : [],
+  };
 }

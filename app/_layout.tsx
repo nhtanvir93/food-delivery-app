@@ -43,14 +43,7 @@ export default function RootLayout() {
     <ThemeProvider>
       <SafeAreaProvider>
         <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
+        <Stack screenOptions={{ headerShown: false }} />
       </SafeAreaProvider>
     </ThemeProvider>
   );
