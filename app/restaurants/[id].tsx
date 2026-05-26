@@ -51,9 +51,8 @@ const RestaurantDetails = () => {
           />
           <Button
             onPress={() => router.back()}
-            variant="outline"
             size="icon"
-            className="absolute left-3 top-3 rounded-full"
+            className="absolute left-3 top-3 rounded-full bg-background"
           >
             <Icon as={ArrowLeft} size={18} />
           </Button>
