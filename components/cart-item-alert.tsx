@@ -14,17 +14,17 @@ const CartItemAlert = () => {
   const { clearCart } = useCartItems();
 
   return (
-    <View className="flex-1 flex-row gap-3 rounded-xl border border-star bg-star/20 px-3 py-4">
+    <View className="flex-1 flex-row gap-3 rounded-xl border border-star/15 bg-star/10 px-3 py-4">
       <Entypo name="warning" size={20} color={theme.star} />
       <View className="flex-1">
-        <Text className="mb-1 font-bold tracking-wide text-star">
+        <Text className="mb-1 font-bold tracking-wide text-star/80">
           Items from another restaurant
         </Text>
-        <Text className="text-sm tracking-wide text-star/70">
+        <Text className="text-sm tracking-wide text-star/60">
           Your cart has items from a different restaurant. Clear your cart to
           add items from here.
         </Text>
-        <Button className="mt-4 bg-star" onPress={clearCart}>
+        <Button className="mt-4 bg-star/80" onPress={clearCart}>
           <Text className="font-bold tracking-wide text-white">
             Clear Cart & Start New Order
           </Text>
