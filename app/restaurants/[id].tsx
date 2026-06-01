@@ -2,9 +2,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import { ArrowLeft, InfoIcon } from "lucide-react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
+import QuantityInput from "@/components/quantity-input";
 import Screen from "@/components/Screen";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -28,10 +29,17 @@ interface SectionItem {
 }
 type FlatItem = SectionHeader | SectionItem;
 
+type CartMenuItemList = MenuItemType & {
+  quantity: number;
+};
+
 const RestaurantDetails = () => {
   const { id } = useLocalSearchParams();
   const [restaurantDetails, setRestaurantDetails] =
     useState<RestaurantDetailsType | null>(null);
+  const [cartMenuItemList, setCartMenuItemList] = useState<CartMenuItemList[]>(
+    [],
+  );
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -39,6 +47,74 @@ const RestaurantDetails = () => {
   useEffect(() => {
     setRestaurantDetails(() => getRestaurantDetails(id as string));
   }, [id]);
+
+  const flatData: FlatItem[] =
+    restaurantDetails !== null
+      ? Object.entries(
+          groupBy(restaurantDetails.menuItems, (mi) => mi.category),
+        ).flatMap(([category, items]) => [
+          { type: "header", category } as SectionHeader,
+          ...(items as MenuItemType[]).map(
+            (item) => ({ type: "item", item }) as SectionItem,
+          ),
+        ])
+      : [];
+
+  const getMenuItemDetails = useCallback(
+    (menuItemId: string) => {
+      return restaurantDetails !== null
+        ? restaurantDetails.menuItems.find(
+            (menuItem) => menuItem.id === menuItemId,
+          )
+        : null;
+    },
+    [restaurantDetails],
+  );
+
+  const hasCartMenuItem = useCallback(
+    (menuItemId: string) => {
+      return (
+        cartMenuItemList.find((menuItem) => menuItem.id === menuItemId) !==
+        undefined
+      );
+    },
+    [cartMenuItemList],
+  );
+
+  const addToCart = useCallback(
+    (itemId: string, quantity: number) => {
+      if (!hasCartMenuItem(itemId)) {
+        const currentMenuItem = getMenuItemDetails(itemId);
+
+        if (currentMenuItem) {
+          setCartMenuItemList((prevItems) => [
+            ...prevItems,
+            { ...currentMenuItem, quantity },
+          ]);
+        }
+      } else {
+        if (quantity === 0) {
+          setCartMenuItemList((prevItems) =>
+            prevItems.filter((prevItem) => prevItem.id !== itemId),
+          );
+        } else {
+          setCartMenuItemList((prevItems) =>
+            prevItems.map((prevItem) => {
+              if (prevItem.id !== itemId) {
+                return prevItem;
+              }
+
+              return {
+                ...prevItem,
+                quantity,
+              };
+            }),
+          );
+        }
+      }
+    },
+    [getMenuItemDetails, hasCartMenuItem],
+  );
 
   if (restaurantDetails === null) {
     return (
@@ -51,15 +127,6 @@ const RestaurantDetails = () => {
       </Alert>
     );
   }
-
-  const flatData: FlatItem[] = Object.entries(
-    groupBy(restaurantDetails.menuItems, (mi) => mi.category),
-  ).flatMap(([category, items]) => [
-    { type: "header", category } as SectionHeader,
-    ...(items as MenuItemType[]).map(
-      (item) => ({ type: "item", item }) as SectionItem,
-    ),
-  ]);
 
   return (
     <Screen>
@@ -154,9 +221,17 @@ const RestaurantDetails = () => {
                         {item.description}
                       </Text>
                     </View>
-                    <Text className="font-bold tracking-wide text-foreground">
-                      ${item.price.toFixed(2)}
-                    </Text>
+                    <View className="flex-row items-end justify-between">
+                      <Text className="font-bold tracking-wide text-foreground">
+                        ${item.price.toFixed(2)}
+                      </Text>
+                      <QuantityInput
+                        key={item.id}
+                        onQuantityChange={(quantity: number) =>
+                          addToCart(item.id, quantity)
+                        }
+                      />
+                    </View>
                   </View>
                 </CardContent>
               </Card>
