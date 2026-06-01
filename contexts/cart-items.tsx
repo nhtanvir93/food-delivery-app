@@ -17,6 +17,7 @@ interface CartItemsContextType {
   setRestaurantId: Dispatch<SetStateAction<string>>;
   cartMenuItemList: CartMenuItemList[];
   setCartMenuItemList: Dispatch<SetStateAction<CartMenuItemList[]>>;
+  clearCart: () => void;
 }
 
 export const CartItemsContext = createContext<CartItemsContextType | null>(
@@ -29,6 +30,11 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     [],
   );
 
+  const clearCart = () => {
+    setRestaurantId("");
+    setCartMenuItemList([]);
+  };
+
   return (
     <CartItemsContext.Provider
       value={{
@@ -36,6 +42,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
         setRestaurantId,
         cartMenuItemList,
         setCartMenuItemList,
+        clearCart,
       }}
     >
       {children}

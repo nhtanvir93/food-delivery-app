@@ -5,6 +5,7 @@ import { ArrowLeft, InfoIcon } from "lucide-react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
+import CartItemAlert from "@/components/cart-item-alert";
 import QuantityInput from "@/components/quantity-input";
 import Screen from "@/components/Screen";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -211,6 +212,9 @@ const RestaurantDetails = () => {
                   {restaurantDetails.distance}
                 </Text>
               </View>
+              {restaurantId !== "" && restaurantId !== restaurantDetails.id && (
+                <CartItemAlert />
+              )}
             </View>
           }
           renderItem={({ item: flatItem }) => {
