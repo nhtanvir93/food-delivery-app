@@ -141,16 +141,19 @@ const RestaurantDetails = () => {
                     style={{ width: 90, height: 90, borderRadius: 8 }}
                     contentFit="cover"
                   />
-                  <View className="flex-1 justify-start">
-                    <Text className="mb-1 font-semibold tracking-wide text-foreground">
-                      {item.name}
-                    </Text>
-                    <Text
-                      className="mb-2 text-xs tracking-wide text-muted-foreground"
-                      numberOfLines={2}
-                    >
-                      {item.description}
-                    </Text>
+                  <View className="flex-1 justify-between">
+                    <View>
+                      <Text className="mb-1 font-semibold tracking-wide text-foreground">
+                        {item.name}
+                      </Text>
+                      <Text
+                        className="mb-2 text-xs tracking-wide text-muted-foreground"
+                        numberOfLines={2}
+                        ellipsizeMode="tail"
+                      >
+                        {item.description}
+                      </Text>
+                    </View>
                     <Text className="font-bold tracking-wide text-foreground">
                       ${item.price.toFixed(2)}
                     </Text>
