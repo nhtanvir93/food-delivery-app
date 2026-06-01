@@ -16,6 +16,7 @@ import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import ThemeProvider from "@/components/theme-provider";
+import CartItemsProvider from "@/contexts/cart-items";
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -41,10 +42,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
-        <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-        <Stack screenOptions={{ headerShown: false }} />
-      </SafeAreaProvider>
+      <CartItemsProvider>
+        <SafeAreaProvider>
+          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+          <Stack screenOptions={{ headerShown: false }} />
+        </SafeAreaProvider>
+      </CartItemsProvider>
     </ThemeProvider>
   );
 }

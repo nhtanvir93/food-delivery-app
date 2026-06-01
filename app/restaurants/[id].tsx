@@ -16,6 +16,7 @@ import {
   type RestaurantDetailsType,
 } from "@/constants/api-dummy-data";
 import { COLORS } from "@/constants/theme";
+import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { getRestaurantDetails, groupBy } from "@/lib/utils";
 
@@ -29,17 +30,16 @@ interface SectionItem {
 }
 type FlatItem = SectionHeader | SectionItem;
 
-type CartMenuItemList = MenuItemType & {
-  quantity: number;
-};
-
 const RestaurantDetails = () => {
   const { id } = useLocalSearchParams();
   const [restaurantDetails, setRestaurantDetails] =
     useState<RestaurantDetailsType | null>(null);
-  const [cartMenuItemList, setCartMenuItemList] = useState<CartMenuItemList[]>(
-    [],
-  );
+  const {
+    restaurantId,
+    setRestaurantId,
+    cartMenuItemList,
+    setCartMenuItemList,
+  } = useCartItems();
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -83,6 +83,19 @@ const RestaurantDetails = () => {
 
   const addToCart = useCallback(
     (itemId: string, quantity: number) => {
+      if (
+        !restaurantDetails ||
+        (restaurantDetails &&
+          restaurantId !== "" &&
+          restaurantId !== restaurantDetails.id)
+      ) {
+        return;
+      }
+
+      if (restaurantId === "") {
+        setRestaurantId(restaurantDetails.id);
+      }
+
       if (!hasCartMenuItem(itemId)) {
         const currentMenuItem = getMenuItemDetails(itemId);
 
@@ -113,7 +126,14 @@ const RestaurantDetails = () => {
         }
       }
     },
-    [getMenuItemDetails, hasCartMenuItem],
+    [
+      getMenuItemDetails,
+      hasCartMenuItem,
+      setCartMenuItemList,
+      restaurantId,
+      setRestaurantId,
+      restaurantDetails,
+    ],
   );
 
   if (restaurantDetails === null) {
@@ -227,6 +247,10 @@ const RestaurantDetails = () => {
                       </Text>
                       <QuantityInput
                         key={item.id}
+                        clickable={
+                          restaurantId === restaurantDetails.id ||
+                          restaurantId === ""
+                        }
                         onQuantityChange={(quantity: number) =>
                           addToCart(item.id, quantity)
                         }

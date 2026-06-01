@@ -7,12 +7,18 @@ import { Icon } from "@/components/ui/icon";
 
 const QuantityInput = ({
   onQuantityChange,
+  clickable,
 }: {
   onQuantityChange: (quantity: number) => void;
+  clickable: boolean;
 }) => {
   const [quantity, setQuantity] = useState(0);
 
   const increment = () => {
+    if (!clickable) {
+      return;
+    }
+
     setQuantity((prev) => {
       const newQuantity = prev + 1;
       onQuantityChange(newQuantity);
@@ -21,6 +27,10 @@ const QuantityInput = ({
   };
 
   const decrement = () => {
+    if (!clickable) {
+      return;
+    }
+
     setQuantity((prev) => {
       const newQuantity = prev - 1;
       onQuantityChange(newQuantity);
