@@ -16,15 +16,15 @@ const CartItemAlert = () => {
   return (
     <View className="flex-1 flex-row gap-3 rounded-xl border border-star bg-star/20 px-3 py-4">
       <Entypo name="warning" size={20} color={theme.star} />
-      <View className="flex-1 gap-3">
-        <Text className="font-bold tracking-wide text-star">
+      <View className="flex-1">
+        <Text className="mb-1 font-bold tracking-wide text-star">
           Items from another restaurant
         </Text>
         <Text className="text-sm tracking-wide text-star/70">
           Your cart has items from a different restaurant. Clear your cart to
           add items from here.
         </Text>
-        <Button className="bg-star" onPress={clearCart}>
+        <Button className="mt-4 bg-star" onPress={clearCart}>
           <Text className="font-bold tracking-wide text-white">
             Clear Cart & Start New Order
           </Text>
