@@ -71,13 +71,9 @@ const RestaurantDetails = () => {
     [restaurantDetails],
   );
 
-  const hasCartMenuItem = useCallback(
-    (menuItemId: string) => {
-      return (
-        cartMenuItemList.find((menuItem) => menuItem.id === menuItemId) !==
-        undefined
-      );
-    },
+  const getCartMenuItem = useCallback(
+    (menuItemId: string) =>
+      cartMenuItemList.find((menuItem) => menuItem.id === menuItemId),
     [cartMenuItemList],
   );
 
@@ -96,7 +92,7 @@ const RestaurantDetails = () => {
         setRestaurantId(restaurantDetails.id);
       }
 
-      if (!hasCartMenuItem(itemId)) {
+      if (!getCartMenuItem(itemId)) {
         const currentMenuItem = getMenuItemDetails(itemId);
 
         if (currentMenuItem) {
@@ -128,7 +124,7 @@ const RestaurantDetails = () => {
     },
     [
       getMenuItemDetails,
-      hasCartMenuItem,
+      getCartMenuItem,
       setCartMenuItemList,
       restaurantId,
       setRestaurantId,
@@ -247,6 +243,9 @@ const RestaurantDetails = () => {
                       </Text>
                       <QuantityInput
                         key={item.id}
+                        initialQuantity={
+                          getCartMenuItem(item.id)?.quantity ?? 0
+                        }
                         clickable={
                           restaurantId === restaurantDetails.id ||
                           restaurantId === ""

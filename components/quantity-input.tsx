@@ -8,11 +8,13 @@ import { Icon } from "@/components/ui/icon";
 const QuantityInput = ({
   onQuantityChange,
   clickable,
+  initialQuantity,
 }: {
   onQuantityChange: (quantity: number) => void;
   clickable: boolean;
+  initialQuantity: number;
 }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(initialQuantity);
 
   const increment = () => {
     if (!clickable) {
