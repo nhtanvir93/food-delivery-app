@@ -103,9 +103,17 @@ const RestaurantDetails = () => {
         }
       } else {
         if (quantity === 0) {
-          setCartMenuItemList((prevItems) =>
-            prevItems.filter((prevItem) => prevItem.id !== itemId),
-          );
+          setCartMenuItemList((prevItems) => {
+            const newItems = prevItems.filter(
+              (prevItem) => prevItem.id !== itemId,
+            );
+
+            if (newItems.length === 0) {
+              setRestaurantId("");
+            }
+
+            return newItems;
+          });
         } else {
           setCartMenuItemList((prevItems) =>
             prevItems.map((prevItem) => {
