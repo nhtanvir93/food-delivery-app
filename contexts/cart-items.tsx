@@ -12,9 +12,15 @@ type CartMenuItemList = MenuItemType & {
   quantity: number;
 };
 
+type CartRestaurant = {
+  id: string;
+  name: string;
+};
+
 interface CartItemsContextType {
-  restaurantId: string;
-  setRestaurantId: Dispatch<SetStateAction<string>>;
+  restaurant: CartRestaurant;
+  setRestaurant: Dispatch<SetStateAction<CartRestaurant>>;
+  clearRestaurant: () => void;
   cartMenuItemList: CartMenuItemList[];
   setCartMenuItemList: Dispatch<SetStateAction<CartMenuItemList[]>>;
   clearCart: () => void;
@@ -25,24 +31,35 @@ export const CartItemsContext = createContext<CartItemsContextType | null>(
 );
 
 const CartItemsProvider = ({ children }: { children: ReactNode }) => {
-  const [restaurantId, setRestaurantId] = useState("");
+  const [restaurant, setRestaurant] = useState<CartRestaurant>({
+    id: "",
+    name: "",
+  });
   const [cartMenuItemList, setCartMenuItemList] = useState<CartMenuItemList[]>(
     [],
   );
 
   const clearCart = () => {
-    setRestaurantId("");
+    clearRestaurant();
     setCartMenuItemList([]);
+  };
+
+  const clearRestaurant = () => {
+    setRestaurant({
+      id: "",
+      name: "",
+    });
   };
 
   return (
     <CartItemsContext.Provider
       value={{
-        restaurantId,
-        setRestaurantId,
+        restaurant,
+        setRestaurant,
         cartMenuItemList,
         setCartMenuItemList,
         clearCart,
+        clearRestaurant,
       }}
     >
       {children}

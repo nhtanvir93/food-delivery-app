@@ -36,8 +36,9 @@ const RestaurantDetails = () => {
   const [restaurantDetails, setRestaurantDetails] =
     useState<RestaurantDetailsType | null>(null);
   const {
-    restaurantId,
-    setRestaurantId,
+    restaurant,
+    setRestaurant,
+    clearRestaurant,
     cartMenuItemList,
     setCartMenuItemList,
   } = useCartItems();
@@ -83,14 +84,17 @@ const RestaurantDetails = () => {
       if (
         !restaurantDetails ||
         (restaurantDetails &&
-          restaurantId !== "" &&
-          restaurantId !== restaurantDetails.id)
+          restaurant.id !== "" &&
+          restaurant.id !== restaurantDetails.id)
       ) {
         return;
       }
 
-      if (restaurantId === "") {
-        setRestaurantId(restaurantDetails.id);
+      if (restaurant.id === "") {
+        setRestaurant({
+          id: restaurantDetails.id,
+          name: restaurantDetails.name,
+        });
       }
 
       if (!getCartMenuItem(itemId)) {
@@ -110,7 +114,7 @@ const RestaurantDetails = () => {
             );
 
             if (newItems.length === 0) {
-              setRestaurantId("");
+              clearRestaurant();
             }
 
             return newItems;
@@ -135,8 +139,9 @@ const RestaurantDetails = () => {
       getMenuItemDetails,
       getCartMenuItem,
       setCartMenuItemList,
-      restaurantId,
-      setRestaurantId,
+      restaurant,
+      setRestaurant,
+      clearRestaurant,
       restaurantDetails,
     ],
   );
@@ -212,9 +217,8 @@ const RestaurantDetails = () => {
                   {restaurantDetails.distance}
                 </Text>
               </View>
-              {restaurantId !== "" && restaurantId !== restaurantDetails.id && (
-                <CartItemAlert />
-              )}
+              {restaurant.id !== "" &&
+                restaurant.id !== restaurantDetails.id && <CartItemAlert />}
             </View>
           }
           renderItem={({ item: flatItem }) => {
@@ -259,8 +263,8 @@ const RestaurantDetails = () => {
                           getCartMenuItem(item.id)?.quantity ?? 0
                         }
                         clickable={
-                          restaurantId === restaurantDetails.id ||
-                          restaurantId === ""
+                          restaurant.id === restaurantDetails.id ||
+                          restaurant.id === ""
                         }
                         onQuantityChange={(quantity: number) =>
                           addToCart(item.id, quantity)
