@@ -1,3 +1,4 @@
+import { AntDesign } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useMemo } from "react";
@@ -8,11 +9,12 @@ import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import MenuItem from "./menu-item";
+import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 const DELIVERY_FEE = 5.99;
 
-const Checkout = () => {
+const Checkout = ({ onClose }: { onClose: () => void }) => {
   const { restaurant, cartMenuItemList } = useCartItems();
 
   const { colorScheme } = useColorScheme();
@@ -32,9 +34,17 @@ const Checkout = () => {
   return (
     <View className="flex-1">
       <View className="gap-3 p-4">
-        <Text className="text-xl font-bold tracking-widest text-foreground">
-          Your Order
-        </Text>
+        <View className="flex-row justify-between py-2">
+          <Text className="text-xl font-bold tracking-widest text-foreground">
+            Your Order
+          </Text>
+          <AntDesign
+            onPress={onClose}
+            name="close"
+            size={20}
+            color={theme.textForeground}
+          />
+        </View>
         {restaurant.id && (
           <View className="flex-row gap-2">
             <Ionicons
@@ -47,7 +57,7 @@ const Checkout = () => {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              from {restaurant.name}
+              from <Text className="font-bold">{restaurant.name}</Text>
             </Text>
           </View>
         )}
@@ -75,7 +85,7 @@ const Checkout = () => {
               color={theme.textForeground}
             />
             <Text className="text-2xl font-bold tracking-wide text-foreground">
-              Your cart is empty
+              No items yet. Hungry?
             </Text>
             <Text className="text-lg tracking-wide text-foreground/60">
               Add items from the menu to get started
@@ -110,6 +120,9 @@ const Checkout = () => {
                 ${(subtotal + DELIVERY_FEE).toFixed(2)}
               </Text>
             </View>
+            <Button variant="default">
+              <Text className="text-white">Checkout</Text>
+            </Button>
           </View>
         </View>
       )}

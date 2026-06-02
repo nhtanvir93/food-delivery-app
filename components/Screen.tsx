@@ -26,7 +26,6 @@ export default function Screen({ children: content }: Props) {
       edges={["top", "bottom"]}
       className="relative flex-1 bg-background"
     >
-      <Header />
       <Drawer
         open={openCartDrawer}
         onOpen={() => setOpenCartDrawer(true)}
@@ -35,8 +34,11 @@ export default function Screen({ children: content }: Props) {
         drawerStyle={{
           backgroundColor: theme.background,
         }}
-        renderDrawerContent={() => <Checkout />}
+        renderDrawerContent={() => (
+          <Checkout onClose={() => setOpenCartDrawer(false)} />
+        )}
       >
+        <Header />
         <View className="flex-1 bg-background p-4">{content}</View>
       </Drawer>
     </SafeAreaView>
