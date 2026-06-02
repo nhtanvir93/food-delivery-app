@@ -6,11 +6,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
 import CartItemAlert from "@/components/cart-item-alert";
-import QuantityInput from "@/components/quantity-input";
+import MenuItem from "@/components/menu-item";
 import Screen from "@/components/Screen";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import {
   type MenuItemType,
@@ -232,48 +231,12 @@ const RestaurantDetails = () => {
 
             const item = flatItem.item;
             return (
-              <Card className="mb-3 w-full py-3">
-                <CardContent className="flex-row gap-3 px-3">
-                  <Image
-                    source={{ uri: item.image }}
-                    // eslint-disable-next-line react-native/no-inline-styles
-                    style={{ width: 90, height: 90, borderRadius: 8 }}
-                    contentFit="cover"
-                  />
-                  <View className="flex-1 justify-between">
-                    <View>
-                      <Text className="mb-1 font-semibold tracking-wide text-foreground">
-                        {item.name}
-                      </Text>
-                      <Text
-                        className="mb-2 text-xs tracking-wide text-muted-foreground"
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                      >
-                        {item.description}
-                      </Text>
-                    </View>
-                    <View className="flex-row items-end justify-between">
-                      <Text className="font-bold tracking-wide text-foreground">
-                        ${item.price.toFixed(2)}
-                      </Text>
-                      <QuantityInput
-                        key={item.id}
-                        initialQuantity={
-                          getCartMenuItem(item.id)?.quantity ?? 0
-                        }
-                        clickable={
-                          restaurant.id === restaurantDetails.id ||
-                          restaurant.id === ""
-                        }
-                        onQuantityChange={(quantity: number) =>
-                          addToCart(item.id, quantity)
-                        }
-                      />
-                    </View>
-                  </View>
-                </CardContent>
-              </Card>
+              <MenuItem
+                key={item.id}
+                item={item}
+                restaurantId={restaurant.id}
+                addToCart={addToCart}
+              />
             );
           }}
           contentContainerClassName="pb-8"
