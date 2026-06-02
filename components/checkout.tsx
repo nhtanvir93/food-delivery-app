@@ -1,12 +1,13 @@
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useMemo } from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 
 import { COLORS } from "@/constants/theme";
 import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 
+import MenuItem from "./menu-item";
 import { Separator } from "./ui/separator";
 
 const DELIVERY_FEE = 5.99;
@@ -52,9 +53,22 @@ const Checkout = () => {
         )}
       </View>
       <Separator className="bg-foreground/10" />
-      <View className="flex-1 items-center justify-center gap-2">
+      <View className="flex-1 gap-2">
+        {cartMenuItemList.length > 0 && (
+          <FlatList
+            data={cartMenuItemList}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => `cart-item-${item.id}`}
+            renderItem={({ item }) => {
+              return (
+                <MenuItem key={item.id} item={item} restaurant={restaurant} />
+              );
+            }}
+            contentContainerClassName="p-4"
+          />
+        )}
         {cartMenuItemList.length === 0 && (
-          <View className="items-center gap-3">
+          <View className="flex-1 items-center justify-center gap-3">
             <Feather
               name="shopping-bag"
               size={50}
@@ -70,7 +84,7 @@ const Checkout = () => {
         )}
       </View>
       {cartMenuItemList.length > 0 && (
-        <>
+        <View>
           <Separator className="bg-foreground/20" />
           <View className="gap-2 p-4">
             <View className="flex-row justify-between">
@@ -97,7 +111,7 @@ const Checkout = () => {
               </Text>
             </View>
           </View>
-        </>
+        </View>
       )}
     </View>
   );
