@@ -10,12 +10,13 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import ThemeProvider from "@/components/theme-provider";
+import CartDrawerProvider from "@/contexts/cart-drawer";
 import CartItemsProvider from "@/contexts/cart-items";
 
 void SplashScreen.preventAutoHideAsync();
@@ -42,12 +43,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <CartItemsProvider>
-        <SafeAreaProvider>
-          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-          <Stack screenOptions={{ headerShown: false }} />
-        </SafeAreaProvider>
-      </CartItemsProvider>
+      <CartDrawerProvider>
+        <CartItemsProvider>
+          <SafeAreaProvider>
+            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+            <Stack screenOptions={{ headerShown: false }} />
+          </SafeAreaProvider>
+        </CartItemsProvider>
+      </CartDrawerProvider>
     </ThemeProvider>
   );
 }

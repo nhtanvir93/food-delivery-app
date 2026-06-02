@@ -5,10 +5,13 @@ import { Pressable, View, Text } from "react-native";
 
 import { Badge } from "@/components/ui/badge";
 import { COLORS } from "@/constants/theme";
+import useCartDrawer from "@/hooks/useCartDrawer";
 import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 const HeaderActions = () => {
+  const { setOpenCartDrawer } = useCartDrawer();
+
   const { cartMenuItemList } = useCartItems();
 
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -32,7 +35,10 @@ const HeaderActions = () => {
       <Pressable className="size-[46px] items-center justify-center rounded-full bg-icon-background p-[3px] active:opacity-60">
         <Feather name="box" size={20} color={theme.textForeground} />
       </Pressable>
-      <Pressable className="relative size-[46px] items-center justify-center rounded-full bg-foreground p-[3px] active:opacity-60">
+      <Pressable
+        onPress={() => setOpenCartDrawer((prev) => !prev)}
+        className="relative size-[46px] items-center justify-center rounded-full bg-foreground p-[3px] active:opacity-60"
+      >
         <Feather name="shopping-bag" size={20} color={theme.background} />
         {cartMenuItemList.length > 0 && (
           <Badge
