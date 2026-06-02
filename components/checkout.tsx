@@ -21,7 +21,7 @@ const Checkout = () => {
           Your Order
         </Text>
       </View>
-      <Separator />
+      <Separator className="bg-foreground/10" />
       <View className="flex-1 items-center justify-center gap-2">
         {cartMenuItemList.length === 0 && (
           <View className="items-center gap-3">
