@@ -24,7 +24,11 @@ interface CartItemsContextType {
   cartMenuItemList: CartMenuItemList[];
   setCartMenuItemList: Dispatch<SetStateAction<CartMenuItemList[]>>;
   getCartMenuItem: (menuItemId: string) => CartMenuItemList | undefined;
-  incrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
+  incrementQuantity: (
+    menuItem: MenuItemType,
+    quantity: number,
+    currentRestaurant: CartRestaurant,
+  ) => void;
   decrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
   clearCart: () => void;
 }
@@ -46,8 +50,18 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     return cartMenuItemList.find((menuItem) => menuItem.id === menuItemId);
   };
 
-  const incrementQuantity = (menuItem: MenuItemType, quantity: number) => {
-    console.log("Hello");
+  const incrementQuantity = (
+    menuItem: MenuItemType,
+    quantity: number,
+    currentRestaurant: CartRestaurant,
+  ) => {
+    if (restaurant.id === "") {
+      setRestaurant({
+        id: currentRestaurant.id,
+        name: currentRestaurant.name,
+      });
+    }
+
     const cartMenuItem = getCartMenuItem(menuItem.id);
 
     if (!cartMenuItem) {

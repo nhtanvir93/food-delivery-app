@@ -48,7 +48,10 @@ const QuantityInput = ({
       <Button
         size="icon"
         className="rounded-full bg-foreground active:bg-foreground"
-        onPress={() => clickable && incrementQuantity(menuItem, quantity + 1)}
+        onPress={() =>
+          clickable &&
+          incrementQuantity(menuItem, quantity + 1, currentRestaurant)
+        }
       >
         <Icon as={Plus} className="text-background" />
       </Button>
