@@ -37,7 +37,7 @@ export default function Screen({ children: content }: Props) {
         }}
         renderDrawerContent={() => <Checkout />}
       >
-        <View className="flex-1 p-4">{content}</View>
+        <View className="flex-1 bg-background p-4">{content}</View>
       </Drawer>
     </SafeAreaView>
   );

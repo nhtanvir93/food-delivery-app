@@ -11,13 +11,13 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { useColorScheme } from "react-native";
 import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import ThemeProvider from "@/components/theme-provider";
 import CartDrawerProvider from "@/contexts/cart-drawer";
 import CartItemsProvider from "@/contexts/cart-items";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -29,7 +29,7 @@ export default function RootLayout() {
     Inter_700Bold,
   });
 
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
   useEffect(() => {
     if (loaded || error) {
@@ -47,7 +47,15 @@ export default function RootLayout() {
         <CartItemsProvider>
           <SafeAreaProvider>
             <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: {
+                  backgroundColor:
+                    colorScheme === "dark" ? "#0a0a0a" : "#ffffff",
+                },
+              }}
+            />
           </SafeAreaProvider>
         </CartItemsProvider>
       </CartDrawerProvider>

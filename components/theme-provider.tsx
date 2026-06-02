@@ -49,8 +49,15 @@ export default function ThemeProvider({ children }: Props) {
 
   return (
     <View
-      // eslint-disable-next-line react-native/no-inline-styles
-      style={[{ flex: 1 }, colorScheme === "dark" ? darkTheme : lightTheme]}
+      style={[
+        // eslint-disable-next-line react-native/no-inline-styles
+        {
+          flex: 1,
+          backgroundColor:
+            colorScheme === "dark" ? "rgb(10,10,10)" : "rgb(255,255,255)",
+        },
+        colorScheme === "dark" ? darkTheme : lightTheme,
+      ]}
     >
       {children}
     </View>
