@@ -1,65 +1,54 @@
 import { Minus, Plus } from "lucide-react-native";
-import React, { useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { type MenuItemType } from "@/constants/api-dummy-data";
+import { type CartRestaurant } from "@/contexts/cart-items";
+import { useCartItems } from "@/hooks/useCartItems";
 
 const QuantityInput = ({
-  onQuantityChange,
-  clickable,
-  initialQuantity,
+  menuItem,
+  restaurant: currentRestaurant,
 }: {
-  onQuantityChange: (quantity: number) => void;
-  clickable: boolean;
-  initialQuantity: number;
+  menuItem: MenuItemType;
+  restaurant: CartRestaurant;
 }) => {
-  const [quantity, setQuantity] = useState(initialQuantity);
+  const { restaurant, getCartMenuItem, incrementQuantity, decrementQuantity } =
+    useCartItems();
 
-  const increment = () => {
-    if (!clickable) {
-      return;
-    }
-
-    setQuantity((prev) => {
-      const newQuantity = prev + 1;
-      onQuantityChange(newQuantity);
-      return newQuantity;
-    });
-  };
-
-  const decrement = () => {
-    if (!clickable) {
-      return;
-    }
-
-    setQuantity((prev) => {
-      const newQuantity = prev - 1;
-      onQuantityChange(newQuantity);
-      return newQuantity;
-    });
-  };
+  const cartItem = getCartMenuItem(menuItem.id);
+  const quantity = cartItem?.quantity ?? 0;
+  const clickable =
+    restaurant.id === "" ||
+    (restaurant.id !== "" && restaurant.id === currentRestaurant.id);
 
   return (
     <View className="flex-row items-center gap-2">
-      <View
-        className={`flex-row items-center gap-2 ${quantity > 0 ? "opacity-100" : "opacity-0"}`}
-      >
-        <Button
-          size="icon"
-          className="rounded-full bg-icon-background active:bg-icon-background"
-          onPress={decrement}
+      {cartItem && (
+        <View
+          className={`flex-row items-center gap-2 ${quantity > 0 ? "opacity-100" : "opacity-0"}`}
         >
-          <Icon as={Minus} />
-        </Button>
-        <Text className="text-lg font-bold tracking-wide text-foreground">
-          {quantity}
-        </Text>
-      </View>
+          <Button
+            size="icon"
+            className="rounded-full bg-icon-background active:bg-icon-background"
+            onPress={() =>
+              clickable && decrementQuantity(menuItem, quantity - 1)
+            }
+          >
+            <Icon as={Minus} />
+          </Button>
+          <Text className="text-lg font-bold tracking-wide text-foreground">
+            {quantity}
+          </Text>
+        </View>
+      )}
+
       <Button
         size="icon"
         className="rounded-full bg-foreground active:bg-foreground"
-        onPress={increment}
+        onPress={() => clickable && incrementQuantity(menuItem, quantity + 1)}
       >
         <Icon as={Plus} className="text-background" />
       </Button>

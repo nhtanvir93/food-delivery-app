@@ -12,7 +12,7 @@ type CartMenuItemList = MenuItemType & {
   quantity: number;
 };
 
-type CartRestaurant = {
+export type CartRestaurant = {
   id: string;
   name: string;
 };
@@ -23,6 +23,9 @@ interface CartItemsContextType {
   clearRestaurant: () => void;
   cartMenuItemList: CartMenuItemList[];
   setCartMenuItemList: Dispatch<SetStateAction<CartMenuItemList[]>>;
+  getCartMenuItem: (menuItemId: string) => CartMenuItemList | undefined;
+  incrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
+  decrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
   clearCart: () => void;
 }
 
@@ -38,6 +41,61 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
   const [cartMenuItemList, setCartMenuItemList] = useState<CartMenuItemList[]>(
     [],
   );
+
+  const getCartMenuItem = (menuItemId: string) => {
+    return cartMenuItemList.find((menuItem) => menuItem.id === menuItemId);
+  };
+
+  const incrementQuantity = (menuItem: MenuItemType, quantity: number) => {
+    console.log("Hello");
+    const cartMenuItem = getCartMenuItem(menuItem.id);
+
+    if (!cartMenuItem) {
+      setCartMenuItemList([...cartMenuItemList, { ...menuItem, quantity }]);
+    } else {
+      setCartMenuItemList((prevMenuItems) =>
+        prevMenuItems.map((prevMenuItem) => {
+          if (prevMenuItem.id !== menuItem.id) {
+            return prevMenuItem;
+          }
+
+          return {
+            ...prevMenuItem,
+            quantity: prevMenuItem.quantity + 1,
+          };
+        }),
+      );
+    }
+  };
+
+  const decrementQuantity = (menuItem: MenuItemType, quantity: number) => {
+    if (quantity === 0) {
+      setCartMenuItemList((prevMenuItems) => {
+        const updateMenuItems = prevMenuItems.filter(
+          (prevMenuItem) => prevMenuItem.id !== menuItem.id,
+        );
+
+        if (updateMenuItems.length === 0) {
+          clearRestaurant();
+        }
+
+        return updateMenuItems;
+      });
+    } else {
+      setCartMenuItemList((prevMenuItems) =>
+        prevMenuItems.map((prevMenuItem) => {
+          if (prevMenuItem.id !== menuItem.id) {
+            return prevMenuItem;
+          }
+
+          return {
+            ...prevMenuItem,
+            quantity: prevMenuItem.quantity - 1,
+          };
+        }),
+      );
+    }
+  };
 
   const clearCart = () => {
     clearRestaurant();
@@ -60,6 +118,9 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
         setCartMenuItemList,
         clearCart,
         clearRestaurant,
+        getCartMenuItem,
+        incrementQuantity,
+        decrementQuantity,
       }}
     >
       {children}

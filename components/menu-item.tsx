@@ -1,28 +1,19 @@
 import { Image } from "expo-image";
-import React, { useCallback } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 
 import { type MenuItemType } from "@/constants/api-dummy-data";
-import { useCartItems } from "@/hooks/useCartItems";
+import { type CartRestaurant } from "@/contexts/cart-items";
 
 import QuantityInput from "./quantity-input";
 import { Card, CardContent } from "./ui/card";
 
 interface Props {
   item: MenuItemType;
-  restaurantId: string;
-  addToCart: (itemId: string, quantity: number) => void;
+  restaurant: CartRestaurant;
 }
 
-const MenuItem = ({ item, restaurantId, addToCart }: Props) => {
-  const { restaurant, cartMenuItemList } = useCartItems();
-
-  const getCartMenuItem = useCallback(
-    (menuItemId: string) =>
-      cartMenuItemList.find((menuItem) => menuItem.id === menuItemId),
-    [cartMenuItemList],
-  );
-
+const MenuItem = ({ item, restaurant: currentRestaurant }: Props) => {
   return (
     <View>
       <Card className="mb-3 w-full py-3">
@@ -52,13 +43,8 @@ const MenuItem = ({ item, restaurantId, addToCart }: Props) => {
               </Text>
               <QuantityInput
                 key={item.id}
-                initialQuantity={getCartMenuItem(item.id)?.quantity ?? 0}
-                clickable={
-                  restaurant.id === restaurantId || restaurant.id === ""
-                }
-                onQuantityChange={(quantity: number) =>
-                  addToCart(item.id, quantity)
-                }
+                menuItem={item}
+                restaurant={currentRestaurant}
               />
             </View>
           </View>

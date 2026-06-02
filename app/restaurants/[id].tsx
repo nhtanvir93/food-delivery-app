@@ -2,7 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import { ArrowLeft, InfoIcon } from "lucide-react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 
 import CartItemAlert from "@/components/cart-item-alert";
@@ -34,13 +34,7 @@ const RestaurantDetails = () => {
   const { id } = useLocalSearchParams();
   const [restaurantDetails, setRestaurantDetails] =
     useState<RestaurantDetailsType | null>(null);
-  const {
-    restaurant,
-    setRestaurant,
-    clearRestaurant,
-    cartMenuItemList,
-    setCartMenuItemList,
-  } = useCartItems();
+  const { restaurant } = useCartItems();
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -60,90 +54,6 @@ const RestaurantDetails = () => {
           ),
         ])
       : [];
-
-  const getMenuItemDetails = useCallback(
-    (menuItemId: string) => {
-      return restaurantDetails !== null
-        ? restaurantDetails.menuItems.find(
-            (menuItem) => menuItem.id === menuItemId,
-          )
-        : null;
-    },
-    [restaurantDetails],
-  );
-
-  const getCartMenuItem = useCallback(
-    (menuItemId: string) =>
-      cartMenuItemList.find((menuItem) => menuItem.id === menuItemId),
-    [cartMenuItemList],
-  );
-
-  const addToCart = useCallback(
-    (itemId: string, quantity: number) => {
-      if (
-        !restaurantDetails ||
-        (restaurantDetails &&
-          restaurant.id !== "" &&
-          restaurant.id !== restaurantDetails.id)
-      ) {
-        return;
-      }
-
-      if (restaurant.id === "") {
-        setRestaurant({
-          id: restaurantDetails.id,
-          name: restaurantDetails.name,
-        });
-      }
-
-      if (!getCartMenuItem(itemId)) {
-        const currentMenuItem = getMenuItemDetails(itemId);
-
-        if (currentMenuItem) {
-          setCartMenuItemList((prevItems) => [
-            ...prevItems,
-            { ...currentMenuItem, quantity },
-          ]);
-        }
-      } else {
-        if (quantity === 0) {
-          setCartMenuItemList((prevItems) => {
-            const newItems = prevItems.filter(
-              (prevItem) => prevItem.id !== itemId,
-            );
-
-            if (newItems.length === 0) {
-              clearRestaurant();
-            }
-
-            return newItems;
-          });
-        } else {
-          setCartMenuItemList((prevItems) =>
-            prevItems.map((prevItem) => {
-              if (prevItem.id !== itemId) {
-                return prevItem;
-              }
-
-              return {
-                ...prevItem,
-                quantity,
-              };
-            }),
-          );
-        }
-      }
-    },
-    [
-      getMenuItemDetails,
-      getCartMenuItem,
-      setCartMenuItemList,
-      restaurant,
-      setRestaurant,
-      clearRestaurant,
-      restaurantDetails,
-    ],
-  );
 
   if (restaurantDetails === null) {
     return (
@@ -234,8 +144,10 @@ const RestaurantDetails = () => {
               <MenuItem
                 key={item.id}
                 item={item}
-                restaurantId={restaurant.id}
-                addToCart={addToCart}
+                restaurant={{
+                  id: restaurantDetails.id,
+                  name: restaurantDetails.name,
+                }}
               />
             );
           }}
