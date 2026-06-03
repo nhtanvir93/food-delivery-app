@@ -9,7 +9,7 @@ import React, {
 
 import { MenuItemType } from "@/constants/api-dummy-data";
 
-type CartMenuItemList = MenuItemType & {
+export type CartMenuItemList = MenuItemType & {
   quantity: number;
 };
 

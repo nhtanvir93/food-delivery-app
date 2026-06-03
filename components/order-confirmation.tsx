@@ -7,14 +7,13 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { COLORS } from "@/constants/theme";
+import { type PaymentMode } from "@/contexts/orders";
 import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-
-type PaymentMode = "creditDebit" | "cash";
 
 const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
   const { colorScheme } = useColorScheme();

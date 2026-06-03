@@ -86,3 +86,12 @@ export function groupBy<T>(
     {} as Record<string, T[]>,
   );
 }
+
+export function getRandomDeliveryTime(deliveryTime: string) {
+  const deliveryTimeRange = deliveryTime.split("-");
+  const max = parseInt(deliveryTimeRange[1]);
+  const min = parseInt(deliveryTimeRange[0]);
+  const diff = max - min + 1;
+
+  return Math.floor(Math.random() * diff) + min;
+}
