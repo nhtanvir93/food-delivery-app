@@ -46,7 +46,7 @@ const HeaderActions = () => {
             variant="destructive"
           >
             <Text className="text-sm text-white">
-              {totalItems < 100 ? totalItems : "99"}
+              {totalItems < 100 ? totalItems : "99+"}
             </Text>
           </Badge>
         )}
