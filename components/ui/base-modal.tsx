@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
-import { Modal, Pressable } from "react-native";
+import { Modal, Pressable, ScrollView } from "react-native";
 
 import { useColorScheme } from "@/lib/useColorScheme";
 
@@ -35,11 +35,11 @@ export const BaseModal = ({
       >
         <Pressable
           // eslint-disable-next-line react-native/no-inline-styles
-          style={{ width: "90%" }}
+          style={{ width: "90%", maxHeight: "90%" }}
           className="gap-4 rounded-lg bg-background p-6"
           onPress={(e) => e.stopPropagation()}
         >
-          {children}
+          <ScrollView>{children}</ScrollView>
         </Pressable>
       </Pressable>
     </Modal>
