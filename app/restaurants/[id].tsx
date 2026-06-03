@@ -147,6 +147,7 @@ const RestaurantDetails = () => {
                 restaurant={{
                   id: restaurantDetails.id,
                   name: restaurantDetails.name,
+                  deliveryTime: restaurantDetails.deliveryTime,
                 }}
               />
             );

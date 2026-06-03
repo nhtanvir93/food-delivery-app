@@ -16,6 +16,7 @@ type CartMenuItemList = MenuItemType & {
 export type CartRestaurant = {
   id: string;
   name: string;
+  deliveryTime: string;
 };
 
 interface CartItemsContextType {
@@ -46,6 +47,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
   const [restaurant, setRestaurant] = useState<CartRestaurant>({
     id: "",
     name: "",
+    deliveryTime: "",
   });
   const [cartMenuItemList, setCartMenuItemList] = useState<CartMenuItemList[]>(
     [],
@@ -64,6 +66,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
       setRestaurant({
         id: currentRestaurant.id,
         name: currentRestaurant.name,
+        deliveryTime: "",
       });
     }
 
@@ -125,6 +128,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     setRestaurant({
       id: "",
       name: "",
+      deliveryTime: "",
     });
   };
 
