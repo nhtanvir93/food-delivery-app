@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import * as DialogPrimitive from "@rn-primitives/dialog";
 import { X } from "lucide-react-native";
 import * as React from "react";

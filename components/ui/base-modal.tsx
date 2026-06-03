@@ -1,6 +1,8 @@
 import React, { type ReactNode } from "react";
 import { Modal, Pressable } from "react-native";
 
+import { useColorScheme } from "@/lib/useColorScheme";
+
 interface BaseModalProps {
   open: boolean;
   onClose: () => void;
@@ -14,6 +16,11 @@ export const BaseModal = ({
   children,
   closeOnBackdrop = true,
 }: BaseModalProps) => {
+  const { colorScheme } = useColorScheme();
+
+  const backdropBgColor =
+    colorScheme === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.8)";
+
   return (
     <Modal
       visible={open}
@@ -23,8 +30,7 @@ export const BaseModal = ({
     >
       <Pressable
         className="flex-1 items-center justify-center"
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+        style={{ backgroundColor: backdropBgColor }}
         onPress={closeOnBackdrop ? onClose : undefined}
       >
         <Pressable

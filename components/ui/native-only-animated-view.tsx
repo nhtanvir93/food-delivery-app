@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Platform } from "react-native";
 import Animated from "react-native-reanimated";
 
