@@ -20,6 +20,10 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
 
+  const [deliverAddr, setDeliveryAddr] = useState(
+    "Devpahar, College Road, Chattogram",
+  );
+
   const { restaurant, deliveryFee, subtotal } = useCartItems();
 
   const [paymentMethod, setPaymentMethod] =
@@ -67,7 +71,11 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
               Delivery Address
             </Text>
           </View>
-          <TextInput className="rounded-lg bg-icon-background px-4 py-2 dark:bg-white" />
+          <TextInput
+            value={deliverAddr}
+            onChangeText={setDeliveryAddr}
+            className="flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
+          />
         </View>
         <View className="gap-4">
           <View className="flex-row gap-2">
@@ -135,7 +143,10 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
             ${subtotal() + deliveryFee}
           </Text>
         </View>
-        <Button className="mt-4 bg-black dark:bg-white">
+        <Button
+          className="mt-4 bg-black dark:bg-white"
+          disabled={deliverAddr.trim().length === 0}
+        >
           <Text className="font-bold tracking-wider text-white dark:text-black">
             Place Order
           </Text>
