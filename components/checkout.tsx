@@ -5,17 +5,28 @@ import React, { useMemo } from "react";
 import { View, Text, FlatList } from "react-native";
 
 import { COLORS } from "@/constants/theme";
+import useCartDrawer from "@/hooks/useCartDrawer";
 import { useCartItems } from "@/hooks/useCartItems";
+import { useModal } from "@/hooks/useModal";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import MenuItem from "./menu-item";
+import { BaseModal } from "./ui/base-modal";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 const DELIVERY_FEE = 5.99;
 
+type CheckoutModals = "confirmPayment" | "confirmOrder";
+
 const Checkout = ({ onClose }: { onClose: () => void }) => {
+  const { open, close, isOpen } = useModal<CheckoutModals>([
+    "confirmPayment",
+    "confirmOrder",
+  ]);
+
   const { restaurant, cartMenuItemList } = useCartItems();
+  const { setOpenCartDrawer } = useCartDrawer();
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -31,8 +42,30 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
     );
   }, [cartMenuItemList]);
 
+  const checkout = () => {
+    setOpenCartDrawer(false);
+    open("confirmPayment");
+  };
+
   return (
     <View className="flex-1">
+      <BaseModal
+        open={isOpen("confirmPayment")}
+        onClose={() => close("confirmPayment")}
+      >
+        <Text className="text-xl font-bold text-foreground">
+          Confirm Payment
+        </Text>
+        <Text className="text-foreground/70">Ready to place your order?</Text>
+        <View className="mt-2 flex-row justify-end gap-3">
+          <Button variant="destructive" onPress={() => close("confirmPayment")}>
+            <Text className="text-white">Cancel</Text>
+          </Button>
+          <Button onPress={() => close("confirmPayment")}>
+            <Text className="text-white">Confirm</Text>
+          </Button>
+        </View>
+      </BaseModal>
       <View className="gap-3 p-4">
         <View className="flex-row justify-between py-2">
           <Text className="text-xl font-bold tracking-widest text-foreground">
@@ -120,7 +153,7 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
                 ${(subtotal + DELIVERY_FEE).toFixed(2)}
               </Text>
             </View>
-            <Button variant="default">
+            <Button onPress={checkout}>
               <Text className="text-white">Checkout</Text>
             </Button>
           </View>
