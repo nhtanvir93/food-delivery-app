@@ -44,7 +44,7 @@ const OrderSuccess = () => {
         </View>
         <View className="flex-row justify-between gap-4">
           <Text className="tracking-wider text-foreground/40">Payment :</Text>
-          <Text className="text-foreground">{total}</Text>
+          <Text className="text-foreground">${total}</Text>
         </View>
         <View className="flex-row justify-between gap-4">
           <Text className="tracking-wider text-foreground/40">

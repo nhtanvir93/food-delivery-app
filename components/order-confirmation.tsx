@@ -104,7 +104,7 @@ const OrderConfirmation = () => {
           <TextInput
             value={deliveryAddr}
             onChangeText={setDeliveryAddr}
-            className="flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
+            className="max-h-[40px] flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
           />
         </View>
         <View className="gap-4">
