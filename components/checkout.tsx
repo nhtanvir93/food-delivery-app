@@ -1,7 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React, { useMemo } from "react";
+import React from "react";
 import { View, Text, FlatList } from "react-native";
 
 import { COLORS } from "@/constants/theme";
@@ -11,11 +11,10 @@ import { useModal } from "@/hooks/useModal";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import MenuItem from "./menu-item";
+import OrderConfirmation from "./order-confirmation";
 import { BaseModal } from "./ui/base-modal";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-
-const DELIVERY_FEE = 5.99;
 
 type CheckoutModals = "confirmPayment" | "confirmOrder";
 
@@ -25,22 +24,12 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
     "confirmOrder",
   ]);
 
-  const { restaurant, cartMenuItemList } = useCartItems();
+  const { restaurant, cartMenuItemList, deliveryFee, subtotal } =
+    useCartItems();
   const { setOpenCartDrawer } = useCartDrawer();
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
-
-  const subtotal = useMemo(() => {
-    if (cartMenuItemList.length === 0) {
-      return 0;
-    }
-
-    return cartMenuItemList.reduce(
-      (total, item) => total + item.quantity * item.price,
-      0,
-    );
-  }, [cartMenuItemList]);
 
   const checkout = () => {
     setOpenCartDrawer(false);
@@ -53,18 +42,7 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
         open={isOpen("confirmPayment")}
         onClose={() => close("confirmPayment")}
       >
-        <Text className="text-xl font-bold text-foreground">
-          Confirm Payment
-        </Text>
-        <Text className="text-foreground/70">Ready to place your order?</Text>
-        <View className="mt-2 flex-row justify-end gap-3">
-          <Button variant="destructive" onPress={() => close("confirmPayment")}>
-            <Text className="text-white">Cancel</Text>
-          </Button>
-          <Button onPress={() => close("confirmPayment")}>
-            <Text className="text-white">Confirm</Text>
-          </Button>
-        </View>
+        <OrderConfirmation onClose={() => close("confirmPayment")} />
       </BaseModal>
       <View className="gap-3 p-4">
         <View className="flex-row justify-between py-2">
@@ -133,7 +111,7 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
             <View className="flex-row justify-between">
               <Text className="tracking-wider text-foreground">Subtotal</Text>
               <Text className="tracking-wider text-foreground">
-                ${subtotal.toFixed(2)}
+                ${subtotal().toFixed(2)}
               </Text>
             </View>
             <View className="flex-row justify-between">
@@ -141,7 +119,7 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
                 Delivery Fee
               </Text>
               <Text className="tracking-wider text-foreground">
-                ${DELIVERY_FEE}
+                ${deliveryFee}
               </Text>
             </View>
             <Separator className="bg-foreground/10" />
@@ -150,11 +128,13 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
                 Total
               </Text>
               <Text className="font-bold tracking-wider text-foreground">
-                ${(subtotal + DELIVERY_FEE).toFixed(2)}
+                ${(subtotal() + deliveryFee).toFixed(2)}
               </Text>
             </View>
-            <Button onPress={checkout}>
-              <Text className="text-white">Checkout</Text>
+            <Button onPress={checkout} className="mt-4 bg-black dark:bg-white">
+              <Text className="font-bold tracking-wider text-white dark:text-black">
+                Checkout
+              </Text>
             </Button>
           </View>
         </View>

@@ -3,6 +3,7 @@ import React, {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
   useState,
 } from "react";
 
@@ -18,6 +19,7 @@ export type CartRestaurant = {
 };
 
 interface CartItemsContextType {
+  deliveryFee: number;
   restaurant: CartRestaurant;
   setRestaurant: Dispatch<SetStateAction<CartRestaurant>>;
   clearRestaurant: () => void;
@@ -31,11 +33,14 @@ interface CartItemsContextType {
   ) => void;
   decrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
   clearCart: () => void;
+  subtotal: () => number;
 }
 
 export const CartItemsContext = createContext<CartItemsContextType | null>(
   null,
 );
+
+const DELIVERY_FEE = 5.99;
 
 const CartItemsProvider = ({ children }: { children: ReactNode }) => {
   const [restaurant, setRestaurant] = useState<CartRestaurant>({
@@ -123,9 +128,22 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const subtotal = useCallback(() => {
+    if (cartMenuItemList.length === 0) {
+      return 0;
+    }
+
+    return cartMenuItemList.reduce(
+      (total, item) => total + item.quantity * item.price,
+      0,
+    );
+  }, [cartMenuItemList]);
+
   return (
     <CartItemsContext.Provider
       value={{
+        deliveryFee: DELIVERY_FEE,
+        subtotal,
         restaurant,
         setRestaurant,
         cartMenuItemList,
