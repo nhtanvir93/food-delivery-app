@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   SetStateAction,
   useCallback,
+  useMemo,
   useState,
 } from "react";
 
@@ -35,6 +36,7 @@ interface CartItemsContextType {
   decrementQuantity: (menuItem: MenuItemType, quantity: number) => void;
   clearCart: () => void;
   subtotal: () => number;
+  totalItems: number;
 }
 
 export const CartItemsContext = createContext<CartItemsContextType | null>(
@@ -139,6 +141,15 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     );
   }, [cartMenuItemList]);
 
+  const totalItems = useMemo(
+    () =>
+      cartMenuItemList.reduce(
+        (total, menuItem) => total + menuItem.quantity,
+        0,
+      ),
+    [cartMenuItemList],
+  );
+
   return (
     <CartItemsContext.Provider
       value={{
@@ -153,6 +164,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
         getCartMenuItem,
         incrementQuantity,
         decrementQuantity,
+        totalItems,
       }}
     >
       {children}

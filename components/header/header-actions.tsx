@@ -12,7 +12,7 @@ import { useColorScheme } from "@/lib/useColorScheme";
 const HeaderActions = () => {
   const { setOpenCartDrawer } = useCartDrawer();
 
-  const { cartMenuItemList } = useCartItems();
+  const { totalItems } = useCartItems();
 
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const theme = useMemo(() => {
@@ -40,13 +40,13 @@ const HeaderActions = () => {
         className="relative size-[46px] items-center justify-center rounded-full bg-foreground p-[3px] active:opacity-60"
       >
         <Feather name="shopping-bag" size={20} color={theme.background} />
-        {cartMenuItemList.length > 0 && (
+        {totalItems > 0 && (
           <Badge
             className="absolute -right-2 -top-2 min-w-5 rounded-full px-2"
             variant="destructive"
           >
             <Text className="text-sm text-white">
-              {cartMenuItemList.length < 100 ? cartMenuItemList.length : "99"}
+              {totalItems < 100 ? totalItems : "99"}
             </Text>
           </Badge>
         )}
