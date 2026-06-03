@@ -63,11 +63,7 @@ const CartItemsProvider = ({ children }: { children: ReactNode }) => {
     currentRestaurant: CartRestaurant,
   ) => {
     if (restaurant.id === "") {
-      setRestaurant({
-        id: currentRestaurant.id,
-        name: currentRestaurant.name,
-        deliveryTime: "",
-      });
+      setRestaurant({ ...currentRestaurant });
     }
 
     const cartMenuItem = getCartMenuItem(menuItem.id);

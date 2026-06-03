@@ -5,31 +5,26 @@ import React from "react";
 import { View, Text, FlatList } from "react-native";
 
 import { COLORS } from "@/constants/theme";
+import { useActiveOrder } from "@/hooks/useActiveOrder";
 import useCartDrawer from "@/hooks/useCartDrawer";
 import { useCartItems } from "@/hooks/useCartItems";
-import { useModal } from "@/hooks/useModal";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import MenuItem from "./menu-item";
-import OrderConfirmation from "./order-confirmation";
-import { BaseModal } from "./ui/base-modal";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
-type CheckoutModals = "confirmPayment" | "confirmOrder";
-
 const Checkout = ({ onClose }: { onClose: () => void }) => {
-  const { open, close, isOpen } = useModal<CheckoutModals>([
-    "confirmPayment",
-    "confirmOrder",
-  ]);
-
   const { restaurant, cartMenuItemList, deliveryFee, subtotal } =
     useCartItems();
   const { setOpenCartDrawer } = useCartDrawer();
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
+
+  const {
+    processModals: { open },
+  } = useActiveOrder();
 
   const checkout = () => {
     setOpenCartDrawer(false);
@@ -38,12 +33,6 @@ const Checkout = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <View className="flex-1">
-      <BaseModal
-        open={isOpen("confirmPayment")}
-        onClose={() => close("confirmPayment")}
-      >
-        <OrderConfirmation onClose={() => close("confirmPayment")} />
-      </BaseModal>
       <View className="gap-3 p-4">
         <View className="flex-row justify-between py-2">
           <Text className="text-xl font-bold tracking-widest text-foreground">

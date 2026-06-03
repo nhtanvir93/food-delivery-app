@@ -1,4 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import * as Crypto from "expo-crypto";
 import { twMerge } from "tailwind-merge";
 
 import {
@@ -7,6 +10,8 @@ import {
   restaurants,
   type ValidRestaurantIdType,
 } from "@/constants/api-dummy-data";
+
+dayjs.extend(utc);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -94,4 +99,12 @@ export function getRandomDeliveryTime(deliveryTime: string) {
   const diff = max - min + 1;
 
   return Math.floor(Math.random() * diff) + min;
+}
+
+export function getFormattedDatetime(timestamp: number) {
+  return dayjs(timestamp).format("D MMM, YYYY h:mm A");
+}
+
+export function generateId(length = 10) {
+  return Crypto.randomUUID().replace(/-/g, "").slice(0, length);
 }

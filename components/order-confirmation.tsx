@@ -8,28 +8,59 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { COLORS } from "@/constants/theme";
 import { type PaymentMode } from "@/contexts/orders";
+import { useActiveOrder } from "@/hooks/useActiveOrder";
 import { useCartItems } from "@/hooks/useCartItems";
+import { useOrders } from "@/hooks/useOrders";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
 
-const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
+const OrderConfirmation = () => {
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
 
-  const [deliverAddr, setDeliveryAddr] = useState(
+  const [deliveryAddr, setDeliveryAddr] = useState(
     "Devpahar, College Road, Chattogram",
   );
 
-  const { restaurant, deliveryFee, subtotal } = useCartItems();
+  const { placeOrder } = useOrders();
+
+  const { restaurant, cartMenuItemList, deliveryFee, subtotal, clearCart } =
+    useCartItems();
 
   const [paymentMethod, setPaymentMethod] =
     useState<PaymentMode>("creditDebit");
 
+  const {
+    setProcessedOrder,
+    processModals: { open, close },
+  } = useActiveOrder();
+
   const handlePaymentMethodChange = (value: string) => {
     setPaymentMethod(value as PaymentMode);
+  };
+
+  const handlePlaceOrder = () => {
+    const currentOrder = placeOrder({
+      deliveryAddr,
+      restaurant,
+      menuItems: cartMenuItemList,
+      paymentMethod,
+      cost: {
+        deliveryFee,
+        subtotal: subtotal(),
+      },
+    });
+
+    clearCart();
+    setProcessedOrder(currentOrder);
+    close("confirmPayment");
+
+    setTimeout(() => {
+      open("orderSuccess");
+    }, 300);
   };
 
   return (
@@ -43,7 +74,7 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
             name="close"
             size={20}
             color={theme.textForeground}
-            onPress={onClose}
+            onPress={() => close("confirmPayment")}
           />
         </View>
         <View className="flex-row gap-2">
@@ -71,7 +102,7 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
             </Text>
           </View>
           <TextInput
-            value={deliverAddr}
+            value={deliveryAddr}
             onChangeText={setDeliveryAddr}
             className="flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
           />
@@ -144,7 +175,8 @@ const OrderConfirmation = ({ onClose }: { onClose: () => void }) => {
         </View>
         <Button
           className="mt-4 bg-black dark:bg-white"
-          disabled={deliverAddr.trim().length === 0}
+          disabled={deliveryAddr.trim().length === 0}
+          onPress={handlePlaceOrder}
         >
           <Text className="font-bold tracking-wider text-white dark:text-black">
             Place Order

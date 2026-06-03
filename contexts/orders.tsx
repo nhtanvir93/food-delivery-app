@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import React, {
   createContext,
   ReactNode,
@@ -8,6 +7,7 @@ import React, {
 } from "react";
 
 import { statusConfig } from "@/constants/api-dummy-data";
+import { generateId } from "@/lib/utils";
 
 import { CartMenuItemList, CartRestaurant } from "./cart-items";
 
@@ -17,7 +17,7 @@ type OrderPayload = {
   deliveryAddr: string;
   restaurant: CartRestaurant;
   menuItems: CartMenuItemList[];
-  paymentMode: PaymentMode;
+  paymentMethod: PaymentMode;
   cost: {
     subtotal: number;
     deliveryFee: number;
@@ -32,7 +32,7 @@ type OrderInfo = {
   statusIdx: number;
 };
 
-type Order = OrderPayload & OrderInfo;
+export type Order = OrderPayload & OrderInfo;
 
 interface OrdersContextType {
   orders: Order[];
@@ -49,12 +49,12 @@ const STATUSES = [
   "delivered",
 ] as const;
 
-const getMinMaxDeliveryTime = (deliveryTime: string): [number, number] => {
-  const [min, max] = deliveryTime.split("-").map(Number);
+const getMinMaxDeliveryTime = (deliveryTime: string) => {
+  const [min, max] = deliveryTime.split(" ")[0].split("-").map(Number);
   return [min, max];
 };
 
-const getRandomDeliveryTime = (min: number, max: number): number => {
+const getRandomDeliveryTime = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
@@ -98,7 +98,7 @@ const OrdersProvider = ({ children }: { children: ReactNode }) => {
 
     const order: Order = {
       ...orderPayload,
-      id: nanoid(10),
+      id: generateId(),
       orderTime: now,
       estimatedDeliveryTime: now + totalMs,
       statusIdx: 0,
