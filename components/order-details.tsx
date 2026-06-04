@@ -65,6 +65,23 @@ const OrderDetails = ({ order }: { order: Order }) => {
               {statusConfig[order.status].label}
             </Text>
           </View>
+          {order.menuItems.map((item) => (
+            <View key={item.id} className="flex-row justify-between gap-4">
+              <Text
+                className="text-sm text-foreground"
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {item.quantity}x {item.name}
+              </Text>
+              <Text className="text-sm font-bold text-foreground">
+                ${(item.price * item.quantity).toFixed(2)}
+              </Text>
+            </View>
+          ))}
+        </View>
+        <Separator className="bg-foreground/10" />
+        <View className="gap-3">
           <View className="flex-row justify-between gap-4">
             <Text className="font-bold tracking-wider text-foreground">
               Delivery to:
