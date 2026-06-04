@@ -8,6 +8,7 @@ import {
   menuItemsByRestaurant,
   type RestaurantIdType,
   restaurants,
+  statusConfig,
   type ValidRestaurantIdType,
 } from "@/constants/api-dummy-data";
 
@@ -107,4 +108,10 @@ export function getFormattedDatetime(timestamp: number) {
 
 export function generateId(length = 10) {
   return Crypto.randomUUID().replace(/-/g, "").slice(0, length);
+}
+
+export function getOrderProgress(statusIdx: number): number {
+  const maxIdx = Object.keys(statusConfig).length;
+  const isValid = statusIdx >= 0 && statusIdx < maxIdx;
+  return isValid ? Number((((statusIdx + 1) / maxIdx) * 100).toFixed(2)) : 0;
 }

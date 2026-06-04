@@ -172,7 +172,7 @@ const OrderConfirmation = () => {
             Total
           </Text>
           <Text className="text-lg font-bold text-foreground">
-            ${subtotal() + deliveryFee}
+            ${(subtotal() + deliveryFee).toFixed(2)}
           </Text>
         </View>
         <Button

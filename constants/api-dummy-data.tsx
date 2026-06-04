@@ -2,27 +2,32 @@ export const statusConfig = {
   pending: {
     label: "Order Pending",
     icon: "AntDesign:clock-circle",
-    color: "text-yellow-500",
+    color: "bg-yellow-500",
+    hex: "#eab308",
   },
   confirmed: {
     label: "Order Confirmed",
     icon: "Feather:package",
-    color: "text-blue-500",
+    color: "bg-blue-500",
+    hex: "#3b82f6",
   },
   preparing: {
     label: "Being Prepared",
     icon: "MaterialCommunityIcons:chef-hat",
-    color: "text-orange-500",
+    color: "bg-orange-500",
+    hex: "#f97316",
   },
   out_for_delivery: {
     label: "Out for Delivery",
     icon: "AntDesign:truck",
-    color: "text-purple-500",
+    color: "bg-purple-500",
+    hex: "#a855f7",
   },
   delivered: {
     label: "Delivered",
     icon: "Feather:check-circle",
-    color: "text-green-500",
+    color: "bg-green-500",
+    hex: "#22c55e",
   },
 } as const;
 
@@ -44,7 +49,7 @@ export const restaurants = [
     image:
       "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
     rating: 4.6,
-    deliveryTime: "20-30 min",
+    deliveryTime: "2-3 min",
     category: "American",
     priceRange: "$",
     distance: "0.8 km",

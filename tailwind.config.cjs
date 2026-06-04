@@ -1,5 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  safelist: [
+    "bg-green-500",
+    "bg-yellow-500",
+    "bg-orange-500",
+    "bg-blue-500",
+    "bg-purple-500"
+  ],
   content: [
     "./App.tsx",
     "./app/**/*",
