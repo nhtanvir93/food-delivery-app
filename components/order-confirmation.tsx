@@ -104,7 +104,9 @@ const OrderConfirmation = () => {
           <TextInput
             value={deliveryAddr}
             onChangeText={setDeliveryAddr}
-            className="max-h-[40px] flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{ height: 40 }}
+            className="flex-1 rounded-lg bg-icon-background px-4 py-2 dark:bg-white"
           />
         </View>
         <View className="gap-4">

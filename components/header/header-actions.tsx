@@ -5,9 +5,14 @@ import { Pressable, View, Text } from "react-native";
 
 import { Badge } from "@/components/ui/badge";
 import { COLORS } from "@/constants/theme";
+import { useActiveOrder } from "@/hooks/useActiveOrder";
 import useCartDrawer from "@/hooks/useCartDrawer";
 import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
+
+import OrderConfirmation from "../order-confirmation";
+import OrderSuccess from "../order-success";
+import { BaseModal } from "../ui/base-modal";
 
 const HeaderActions = () => {
   const { setOpenCartDrawer } = useCartDrawer();
@@ -20,6 +25,9 @@ const HeaderActions = () => {
   }, [colorScheme]);
 
   const { openDrawerWith } = useCartDrawer();
+  const {
+    processModals: { isOpen, close },
+  } = useActiveOrder();
 
   return (
     <View className="w-1/2 flex-row items-center justify-end gap-2 self-stretch">
@@ -53,6 +61,18 @@ const HeaderActions = () => {
           </Badge>
         )}
       </Pressable>
+      <BaseModal
+        open={isOpen("confirmPayment")}
+        onClose={() => close("confirmPayment")}
+      >
+        <OrderConfirmation />
+      </BaseModal>
+      <BaseModal
+        open={isOpen("orderSuccess")}
+        onClose={() => close("orderSuccess")}
+      >
+        <OrderSuccess />
+      </BaseModal>
     </View>
   );
 };

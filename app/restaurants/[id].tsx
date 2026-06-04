@@ -7,11 +7,8 @@ import { View, Text, FlatList } from "react-native";
 
 import CartItemAlert from "@/components/cart-item-alert";
 import MenuItem from "@/components/menu-item";
-import OrderConfirmation from "@/components/order-confirmation";
-import OrderSuccess from "@/components/order-success";
 import Screen from "@/components/Screen";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { BaseModal } from "@/components/ui/base-modal";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import {
@@ -19,7 +16,6 @@ import {
   type RestaurantDetailsType,
 } from "@/constants/api-dummy-data";
 import { COLORS } from "@/constants/theme";
-import { useActiveOrder } from "@/hooks/useActiveOrder";
 import { useCartItems } from "@/hooks/useCartItems";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { getRestaurantDetails, groupBy } from "@/lib/utils";
@@ -42,10 +38,6 @@ const RestaurantDetails = () => {
 
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
-
-  const {
-    processModals: { isOpen, close },
-  } = useActiveOrder();
 
   useEffect(() => {
     setRestaurantDetails(() => getRestaurantDetails(id as string));
@@ -77,18 +69,6 @@ const RestaurantDetails = () => {
 
   return (
     <Screen>
-      <BaseModal
-        open={isOpen("confirmPayment")}
-        onClose={() => close("confirmPayment")}
-      >
-        <OrderConfirmation />
-      </BaseModal>
-      <BaseModal
-        open={isOpen("orderSuccess")}
-        onClose={() => close("orderSuccess")}
-      >
-        <OrderSuccess />
-      </BaseModal>
       <View className="flex-1">
         <FlatList
           data={flatData}
