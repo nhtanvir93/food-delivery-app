@@ -19,6 +19,8 @@ const HeaderActions = () => {
     return colorScheme === "dark" ? COLORS.dark : COLORS.light;
   }, [colorScheme]);
 
+  const { openDrawerWith } = useCartDrawer();
+
   return (
     <View className="w-1/2 flex-row items-center justify-end gap-2 self-stretch">
       <Pressable
@@ -36,7 +38,7 @@ const HeaderActions = () => {
         <Feather name="box" size={20} color={theme.textForeground} />
       </Pressable>
       <Pressable
-        onPress={() => setOpenCartDrawer((prev) => !prev)}
+        onPress={() => openDrawerWith("checkout")}
         className="relative size-[46px] items-center justify-center rounded-full bg-foreground p-[3px] active:opacity-60"
       >
         <Feather name="shopping-bag" size={20} color={theme.background} />

@@ -7,7 +7,7 @@ import { COLORS } from "@/constants/theme";
 import useCartDrawer from "@/hooks/useCartDrawer";
 import { useColorScheme } from "@/lib/useColorScheme";
 
-import Checkout from "./checkout";
+import DrawerContent from "./drawer-content";
 import Header from "./header/header";
 
 interface Props {
@@ -20,6 +20,8 @@ export default function Screen({ children: content }: Props) {
   const { colorScheme } = useColorScheme();
 
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
+
+  const { drawerView } = useCartDrawer();
 
   return (
     <SafeAreaView
@@ -35,7 +37,10 @@ export default function Screen({ children: content }: Props) {
           backgroundColor: theme.background,
         }}
         renderDrawerContent={() => (
-          <Checkout onClose={() => setOpenCartDrawer(false)} />
+          <DrawerContent
+            view={drawerView}
+            onClose={() => setOpenCartDrawer(false)}
+          />
         )}
       >
         <Header />
