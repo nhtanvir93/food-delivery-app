@@ -1,20 +1,20 @@
 import React, {
   createContext,
-  ReactNode,
+  type ReactNode,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 
-import { statusConfig } from "@/constants/api-dummy-data";
+import { type statusConfig } from "@/constants/api-dummy-data";
 import { generateId } from "@/lib/utils";
 
-import { CartMenuItemList, CartRestaurant } from "./cart-items";
+import { type CartMenuItemList, type CartRestaurant } from "./cart-items";
 
 export type PaymentMode = "creditDebit" | "cash";
 
-type OrderPayload = {
+interface OrderPayload {
   deliveryAddr: string;
   restaurant: CartRestaurant;
   menuItems: CartMenuItemList[];
@@ -23,15 +23,15 @@ type OrderPayload = {
     subtotal: number;
     deliveryFee: number;
   };
-};
+}
 
-type OrderInfo = {
+interface OrderInfo {
   id: string;
   orderTime: number;
   estimatedDeliveryTime: number;
   status: keyof typeof statusConfig;
   statusIdx: number;
-};
+}
 
 export type Order = OrderPayload & OrderInfo;
 

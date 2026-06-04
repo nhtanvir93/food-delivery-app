@@ -1,14 +1,14 @@
 import React, {
   createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
   useState,
 } from "react";
 
 import { useModal } from "@/hooks/useModal";
 
-import { Order } from "./orders";
+import { type Order } from "./orders";
 
 export type CheckoutModals = "confirmPayment" | "orderSuccess";
 

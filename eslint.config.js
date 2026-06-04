@@ -26,6 +26,14 @@ export default defineConfig([
       "@typescript-eslint": tsPlugin,
     },
 
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+        },
+      },
+    },
+
     rules: {
       // ── Prettier ──────────────────────────────────────────────────────
       "prettier/prettier": "error",
@@ -106,6 +114,7 @@ export default defineConfig([
       "app/**/*.{ts,tsx}",
       "components/**/*.{ts,tsx}",
       "hooks/**/*.{ts,tsx}",
+      "contexts/**/*.{ts,tsx}",
       "lib/**/*.{ts,tsx}",
       "utils/**/*.{ts,tsx}",
       "src/**/*.{ts,tsx}",

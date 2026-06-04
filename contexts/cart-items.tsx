@@ -1,25 +1,25 @@
 import React, {
   createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
   useCallback,
   useMemo,
   useState,
 } from "react";
 
-import { MenuItemType } from "@/constants/api-dummy-data";
+import { type MenuItemType } from "@/constants/api-dummy-data";
 
 export type CartMenuItemList = MenuItemType & {
   quantity: number;
 };
 
-export type CartRestaurant = {
+export interface CartRestaurant {
   id: string;
   name: string;
   deliveryTime: string;
   image: string;
-};
+}
 
 interface CartItemsContextType {
   deliveryFee: number;
