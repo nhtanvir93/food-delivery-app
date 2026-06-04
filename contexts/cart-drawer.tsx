@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 
-export type DrawerView = "checkout";
+export type DrawerView = "checkout" | "orderTracking";
 
 interface CartDrawerContextType {
   openCartDrawer: boolean;

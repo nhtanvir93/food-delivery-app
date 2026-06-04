@@ -42,7 +42,10 @@ const HeaderActions = () => {
           <AntDesign name="sun" size={20} color={theme.textForeground} />
         )}
       </Pressable>
-      <Pressable className="size-[46px] items-center justify-center rounded-full bg-icon-background p-[3px] active:opacity-60">
+      <Pressable
+        onPress={() => openDrawerWith("orderTracking")}
+        className="size-[46px] items-center justify-center rounded-full bg-icon-background p-[3px] active:opacity-60"
+      >
         <Feather name="box" size={20} color={theme.textForeground} />
       </Pressable>
       <Pressable

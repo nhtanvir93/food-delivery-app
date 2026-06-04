@@ -3,6 +3,7 @@ import React, { type ReactNode } from "react";
 import { type DrawerView } from "@/contexts/cart-drawer";
 
 import Checkout from "./checkout";
+import OrderTracking from "./order-tracking";
 
 interface Props {
   view: DrawerView;
@@ -11,6 +12,7 @@ interface Props {
 
 const DRAWER_VIEWS: Record<DrawerView, (onClose: () => void) => ReactNode> = {
   checkout: (onClose) => <Checkout onClose={onClose} />,
+  orderTracking: (onClose) => <OrderTracking onClose={onClose} />,
 };
 
 export default function DrawerContent({ view, onClose }: Props) {
