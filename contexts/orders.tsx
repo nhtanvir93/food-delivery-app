@@ -2,6 +2,7 @@ import React, {
   createContext,
   ReactNode,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -36,6 +37,7 @@ export type Order = OrderPayload & OrderInfo;
 
 interface OrdersContextType {
   orders: Order[];
+  activeOrders: number;
   placeOrder: (orderPayload: OrderPayload) => Order;
 }
 
@@ -111,6 +113,8 @@ const OrdersProvider = ({ children }: { children: ReactNode }) => {
     return order;
   };
 
+  const activeOrders = useMemo(() => orders.length, [orders]);
+
   useEffect(() => {
     const intervals = intervalsRef.current;
 
@@ -120,7 +124,7 @@ const OrdersProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <OrdersContext.Provider value={{ orders, placeOrder }}>
+    <OrdersContext.Provider value={{ orders, placeOrder, activeOrders }}>
       {children}
     </OrdersContext.Provider>
   );

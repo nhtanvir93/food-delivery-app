@@ -8,6 +8,7 @@ import { COLORS } from "@/constants/theme";
 import { useActiveOrder } from "@/hooks/useActiveOrder";
 import useCartDrawer from "@/hooks/useCartDrawer";
 import { useCartItems } from "@/hooks/useCartItems";
+import { useOrders } from "@/hooks/useOrders";
 import { useColorScheme } from "@/lib/useColorScheme";
 
 import OrderConfirmation from "../order-confirmation";
@@ -28,6 +29,7 @@ const HeaderActions = () => {
   const {
     processModals: { isOpen, close },
   } = useActiveOrder();
+  const { activeOrders } = useOrders();
 
   return (
     <View className="w-1/2 flex-row items-center justify-end gap-2 self-stretch">
@@ -47,6 +49,16 @@ const HeaderActions = () => {
         className="size-[46px] items-center justify-center rounded-full bg-icon-background p-[3px] active:opacity-60"
       >
         <Feather name="box" size={20} color={theme.textForeground} />
+        {activeOrders > 0 && (
+          <Badge
+            className="absolute -right-2 -top-2 min-w-5 rounded-full px-2"
+            variant="secondary"
+          >
+            <Text className="text-sm text-white">
+              {activeOrders < 100 ? activeOrders : "99+"}
+            </Text>
+          </Badge>
+        )}
       </Pressable>
       <Pressable
         onPress={() => openDrawerWith("checkout")}

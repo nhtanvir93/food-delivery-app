@@ -20,8 +20,8 @@ const badgeVariants = cva(
           Platform.select({ web: "[a&]:hover:bg-primary/90" }),
         ),
         secondary: cn(
-          "bg-secondary border-transparent",
-          Platform.select({ web: "[a&]:hover:bg-secondary/90" }),
+          "bg-accent border-transparent",
+          Platform.select({ web: "[a&]:hover:bg-accent/90" }),
         ),
         destructive: cn(
           "bg-destructive border-transparent",
