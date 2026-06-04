@@ -9,6 +9,12 @@ import { useColorScheme } from "@/lib/useColorScheme";
 import OrderDetails from "./order-details";
 import { Separator } from "./ui/separator";
 
+const OrderListHeader = () => (
+  <View className="mb-1">
+    <Text className="text-lg font-bold text-foreground">Active Orders</Text>
+  </View>
+);
+
 const OrderTracking = ({ onClose }: { onClose: () => void }) => {
   const { colorScheme } = useColorScheme();
   const theme = colorScheme === "dark" ? COLORS.dark : COLORS.light;
@@ -47,6 +53,7 @@ const OrderTracking = ({ onClose }: { onClose: () => void }) => {
           data={orders}
           showsVerticalScrollIndicator={false}
           keyExtractor={(order) => `orders-${order.id}`}
+          ListHeaderComponent={OrderListHeader}
           renderItem={({ item }) => {
             return <OrderDetails key={item.id} order={item} />;
           }}

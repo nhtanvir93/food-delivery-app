@@ -113,7 +113,10 @@ const OrdersProvider = ({ children }: { children: ReactNode }) => {
     return order;
   };
 
-  const activeOrders = useMemo(() => orders.length, [orders]);
+  const activeOrders = useMemo(
+    () => orders.filter((order) => order.status !== "delivered").length,
+    [orders],
+  );
 
   useEffect(() => {
     const intervals = intervalsRef.current;
