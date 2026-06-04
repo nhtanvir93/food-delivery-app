@@ -1,4 +1,4 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 
@@ -26,7 +26,7 @@ const OrderSuccess = () => {
   return (
     <View className="gap-4">
       <View className="items-center gap-4">
-        <Ionicons name="checkmark-circle" size={40} color="#5ED45E" />
+        <Feather name="check-circle" size={40} color="#5ED45E" />
         <Text className="text-xl font-bold tracking-wider text-foreground">
           Order Placed Successfully
         </Text>

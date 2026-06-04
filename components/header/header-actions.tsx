@@ -16,8 +16,6 @@ import OrderSuccess from "../order-success";
 import { BaseModal } from "../ui/base-modal";
 
 const HeaderActions = () => {
-  const { setOpenCartDrawer } = useCartDrawer();
-
   const { totalItems } = useCartItems();
 
   const { colorScheme, toggleColorScheme } = useColorScheme();
