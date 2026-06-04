@@ -148,6 +148,7 @@ const RestaurantDetails = () => {
                   id: restaurantDetails.id,
                   name: restaurantDetails.name,
                   deliveryTime: restaurantDetails.deliveryTime,
+                  image: restaurantDetails.image,
                 }}
               />
             );
